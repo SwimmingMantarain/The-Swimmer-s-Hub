@@ -3,9 +3,6 @@ from flask_login import LoginManager
 from models import db, User
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_cors import CORS
-import logging
-
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
