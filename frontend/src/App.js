@@ -1,19 +1,19 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Login from './components/Login';
-import Signup from './components/Signup';
-import Main from './components/Main';
+import Header from './components/Header';
+import Sidebar from './components/Sidebar';
+import Dashboard from './components/Dashboard';
+import './App.css'; // For basic styling
 
-function App() {
+const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/main" element={<Main />} />
-      </Routes>
-    </Router>
+    <div className="app">
+      <Header />
+      <div className="main-content">
+        <Sidebar />
+        <Dashboard />
+      </div>
+    </div>
   );
-}
+};
 
 export default App;

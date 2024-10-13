@@ -1,53 +1,68 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
-function Signup() {
+const Signup = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
-  const navigate = useNavigate();
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
+  const history = useHistory();
 
-  const handleSignup = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
     try {
-      const response = await axios.post('/api/register', { username, password });
-      setMessage('Sign up successful! You can now log in.');
-      setTimeout(() => navigate('/'), 2000); // Redirect to login page after 2 seconds
-    } catch (error) {
-      setMessage('Sign up failed.');
-      console.error(error);
+      const response = await axios.post('http://127.0.0.1:5000/api/register', { username, password });
+      if (response.data.success) {
+        history.push('/login'); // Redirect to the login page
+      } else {
+        setError(response.data.message);
+      }
+    } catch (err) {
+      setError('Error creating account');
     }
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-100">
-      <form className="bg-white p-6 rounded shadow-md" onSubmit={handleSignup}>
-        <h2 className="text-2xl mb-4">Sign Up</h2>
-        <input
-          type="text"
-          className="w-full p-2 mb-4 border rounded"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <input
-          type="password"
-          className="w-full p-2 mb-4 border rounded"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button
-          type="submit"
-          className="w-full p-2 bg-green-500 text-white rounded hover:bg-green-600"
-        >
-          Sign Up
-        </button>
-        {message && <p className="mt-2 text-green-500">{message}</p>}
+    <div className="signup-page">
+      <h2>Sign Up</h2>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Username:</label>
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>Password:</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label>Confirm Password:</label>
+          <input
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit">Sign Up</button>
       </form>
     </div>
   );
-}
+};
 
 export default Signup;
