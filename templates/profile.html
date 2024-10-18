@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ user.username }}'s Profile</h2>
+
+<h3>Personal Bests</h3>
+<ul>
+    {% for event, time in pbs.items() %}
+        <li>{{ event }}: {{ time }}</li>
+    {% endfor %}
+</ul>
+
+<h3>Training Sessions</h3>
+<div id="sessions" hx-get="/training_sessions" hx-trigger="load"></div>
+{% endblock %}

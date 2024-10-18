@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swim App</title>
+    <link href="{{ url_for('static', filename='css/tailwind.css') }}" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <header class="bg-blue-500 text-white p-4">
+        <h1 class="text-2xl">Swim App</h1>
+        <nav>
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('auth.logout') }}">Logout</a> |
+                <a href="{{ url_for('user_profile.profile', user_id=current_user.id) }}">Profile</a>
+            {% else %}
+                <a href="{{ url_for('auth.login') }}">Login</a> |
+                <a href="{{ url_for('auth.register') }}">Register</a>
+            {% endif %}
+        </nav>
+    </header>    
+    <main class="p-6">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
