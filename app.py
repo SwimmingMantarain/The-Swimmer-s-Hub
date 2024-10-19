@@ -13,6 +13,9 @@ app.config.from_object(config.Config)
 # Initialize SQLAlchemy
 db.init_app(app)
 
+with app.app_context():
+    db.create_all()
+
 # Initialize Flask-Migrate
 migrate = Migrate(app, db)
 

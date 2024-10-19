@@ -13,7 +13,7 @@ def login():
         user = User.query.filter_by(email=email).first()
         if user and user.check_password(password):
             login_user(user)
-            return redirect(url_for('user_profile.profile', user_id=user.id))
+            return redirect(url_for('user_profile.profile', user_name=user.username))
         flash('Invalid email or password')
     return render_template('login.html')
 
@@ -36,7 +36,7 @@ def register():
         db.session.commit()
 
         login_user(new_user)
-        return redirect(url_for('user_profile.profile', user_id=new_user.id))
+        return redirect(url_for('user_profile.profile', user_name=new_user.username))
 
     return render_template('register.html')
 

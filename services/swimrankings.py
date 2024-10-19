@@ -1,6 +1,6 @@
 import requests
 
-def fetch_pb(user_id):
+def fetch_pb(user_name):
     # Replace with actual SwimRankings API or scraping logic
     return {
         "100m Freestyle": "00:55.23",
