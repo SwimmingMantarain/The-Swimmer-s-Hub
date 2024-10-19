@@ -11,5 +11,10 @@
 </ul>
 
 <h3>Training Sessions</h3>
+<div>
+    <a href="{{ url_for('training_sessions.create') }}">Create Session</a> |
+    <a href="{{ url_for('training_sessions.edit') }}">Edit Session</a> |
+    <a href="{{ url_for('training_sessions.view') }}">View Session</a>
+</div>
 <div id="sessions" hx-get="/training_sessions" hx-trigger="load"></div>
 {% endblock %}
