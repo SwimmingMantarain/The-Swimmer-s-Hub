@@ -19,8 +19,8 @@ class User(UserMixin, db.Model):
 class TrainingSession(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    date = db.Column(db.Date, nullable=False)
     distance = db.Column(db.Integer, nullable=False)
+    name = db.Column(db.String(120), nullable=False)
 
 class Competition(db.Model):
     id = db.Column(db.Integer, primary_key=True)

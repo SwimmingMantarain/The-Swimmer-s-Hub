@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Create Session</h2>
+<form method="POST">
+    <div>
+        <label for="session_name">Session Name:</label>
+        <input type="text" id="session_name" name="session_name" required>
+    </div>
+    <div>
+        <label for="session_distance">Session Distance:</label>
+        <input type="number" id="session_distance" name="session_distance" min="0" required>
+        <a>m</a>
+    </div>
+    <button type="submit">Create</button>
+</form>
+{% endblock %}
