@@ -1,0 +1,13 @@
+.link-button {
+    background: none; /* Remove background */
+    border: none; /* Remove border */
+    color: blue; /* Link color */
+    text-decoration: underline; /* Underline text */
+    cursor: pointer; /* Change cursor to pointer */
+    padding: 0; /* Remove padding */
+    font: inherit; /* Inherit font styles */
+}
+
+.link-button:hover {
+    color: darkblue; /* Change color on hover */
+}

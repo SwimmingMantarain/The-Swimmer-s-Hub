@@ -24,6 +24,13 @@ def create():
 def edit(username, session_id):
     return render_template('edit_session.html', username=username, session_id=session_id)
 
+@training_sessions.route('/delete_session/<username>/<session_id>', methods=['POST'])
+@login_required
+def delete(username, session_id):
+    user = User.query.filter_by(username=username).first()
+    session_user_id = TrainingSession.query.filter_by(id=session_id).user_id
+    print(user, session_user_id)
+
 @training_sessions.route('/view_sessions', methods=['GET'])
 @login_required
 def view():

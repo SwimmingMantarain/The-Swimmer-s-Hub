@@ -5,6 +5,7 @@ from models import db, User
 from routes.auth import auth
 from routes.training_sessions import training_sessions
 from routes.user_profile import user_profile
+from routes.defaults import defaults
 import config
 
 app = Flask(__name__)
@@ -32,6 +33,7 @@ def load_user(user_id):
 app.register_blueprint(auth)
 app.register_blueprint(training_sessions)
 app.register_blueprint(user_profile)
+app.register_blueprint(defaults)
 
 if __name__ == '__main__':
     app.run(debug=True)

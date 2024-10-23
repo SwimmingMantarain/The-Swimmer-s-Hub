@@ -17,8 +17,12 @@
 </div>
 <ul>
     {% for session in sessions %}
-    <li>{{ session.name }}: {{ session.distance }} meters :: <a
-            href="{{ url_for('training_sessions.edit') }}/{{user.username}}/{{session.id}}">Edit</a></li>
+    <li>{{ session.name }}: {{ session.distance }} meters ::
+        <a href="{{ url_for('training_sessions.edit', username=user.username, session_id=session.id) }}">Edit</a> ||
+        <form method="POST" action="{{ url_for('training_sessions.delete', username=user.username, session_id=session.id) }}">
+            <button type="submit" id="link-button">Delete</button>
+        </form>
+    </li>
     {% endfor %}
 </ul>
 {% endblock %}
