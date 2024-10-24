@@ -22,6 +22,16 @@ class TrainingSession(db.Model):
     distance = db.Column(db.Integer, nullable=False)
     name = db.Column(db.String(120), nullable=False)
 
+class TrainingSection(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    training_session_id = db.Column(db.Integer, db.ForeignKey('trainingsession.id'), nullable=False)
+    name = db.Column(db.String(120), nullable=False)
+
+class TrainingBlock(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    training_section_id = db.Column(db.Integer, db.ForeignKey('trainingsection.id'), nullable=False)
+    distance = db.Column(db.Integer, nullable=False) # Placeholder
+
 class Competition(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120), nullable=False)
