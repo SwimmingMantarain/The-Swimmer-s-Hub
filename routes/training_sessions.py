@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template, request, redirect, url_for
-from models import TrainingSession, db
+from flask import Blueprint, render_template, request, redirect, url_for, jsonify
+from models import TrainingSession, User, db
 from flask_login import login_required, current_user
 
 training_sessions = Blueprint('training_sessions', __name__)
@@ -28,8 +28,15 @@ def edit(username, session_id):
 @login_required
 def delete(username, session_id):
     user = User.query.filter_by(username=username).first()
-    session_user_id = TrainingSession.query.filter_by(id=session_id).user_id
-    print(user, session_user_id)
+    session = TrainingSession.query.filter_by(id=session_id).first()
+    if user.id == session.user_id:
+        db.session.delete(session)
+        db.session.commit()
+        return redirect(url_for('user_profile.profile', user_name=current_user.username))
+    
+    else:
+        flash("Not your session")
+        return redirect(url_for('user_profile.profile', user_name=current_user.username))
 
 @training_sessions.route('/view_sessions', methods=['GET'])
 @login_required
