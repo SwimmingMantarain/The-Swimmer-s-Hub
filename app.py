@@ -3,13 +3,14 @@ from flask_login import LoginManager
 from flask_migrate import Migrate
 from models import db, User
 from routes.auth import auth
-from routes.training_sessions import training_sessions
+from routes.training_sessions import training_sessions, UPLOAD_FOLDER
 from routes.user_profile import user_profile
 from routes.defaults import defaults
-import config
+import config 
 
 app = Flask(__name__)
 app.config.from_object(config.Config)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Initialize SQLAlchemy
 db.init_app(app)

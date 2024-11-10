@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+
+<p>Click the session date to view the session</p>
+<ul>
+    {% for session in sessions %}
+    <li>
+        <div class="session-container" id="{{ session.id }}" onclick="openModal('{{ session.id }}')">
+            {{ session.date }} @ {{ session.time }}
+            <form method="POST"
+                action="{{ url_for('training_sessions.delete', username=user.username, session_id=session.id) }}">
+                <button type="submit">Delete</button>
+            </form>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+
+
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="session-content">
+            <div id="session-info">
+                <p></p>
+            </div>
+            <img id="session-image" src="">
+        </div>
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/session_modal.js') }}"></script>
+
+{% endblock %}

@@ -19,10 +19,11 @@ class User(UserMixin, db.Model):
 class TrainingSession(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    distance = db.Column(db.Integer, nullable=False)
-    name = db.Column(db.String(120), nullable=False)
+    date = db.Column(db.Date, nullable=False)
+    time = db.Column(db.Time, nullable=False)
+    path = db.Column(db.String(120), nullable=False)
 
-class TrainingSection(db.Model):
+"""class TrainingSection(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     training_session_id = db.Column(db.Integer, db.ForeignKey('trainingsession.id'), nullable=False)
     name = db.Column(db.String(120), nullable=False)
@@ -30,7 +31,7 @@ class TrainingSection(db.Model):
 class TrainingBlock(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     training_section_id = db.Column(db.Integer, db.ForeignKey('trainingsection.id'), nullable=False)
-    distance = db.Column(db.Integer, nullable=False) # Placeholder
+    distance = db.Column(db.Integer, nullable=False) # Placeholder"""
 
 class Competition(db.Model):
     id = db.Column(db.Integer, primary_key=True)
