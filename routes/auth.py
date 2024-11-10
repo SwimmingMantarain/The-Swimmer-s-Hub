@@ -23,6 +23,7 @@ def register():
         username = request.form['username']
         email = request.form['email']
         password = request.form['password']
+        swimrankings_id = request.form.get('swimrankings_id')
 
         # Check if email or username already exists
         if User.query.filter_by(email=email).first() or User.query.filter_by(username=username).first():
@@ -30,7 +31,7 @@ def register():
             return redirect(url_for('auth.register'))
 
         # Create new user
-        new_user = User(username=username, email=email)
+        new_user = User(username=username, email=email, swimrankings_id=swimrankings_id)
         new_user.set_password(password)
         db.session.add(new_user)
         db.session.commit()
