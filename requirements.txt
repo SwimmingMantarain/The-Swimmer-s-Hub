@@ -6,3 +6,5 @@ Flask-Migrate
 requests
 HTMX
 TailwindCSS
+swimrankingsscraper
+pipreqs
