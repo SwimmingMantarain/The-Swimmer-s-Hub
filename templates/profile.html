@@ -6,12 +6,19 @@
 <h2>{{ user.username }}'s Profile</h2>
 
 {% if pbs %}
-<h3>Personal Bests</h3>
-<ul>
+<table>
     {% for pb in pbs %}
-    <li>{{ pb.event_name }}: {{ pb.time }} ({{ pb.course_length }})</li>
+    <tr>
+        <td>{{ pb.event_name }}</td>
+        <td>{{ pb.time }}</td>
+        <td>{{ pb.course_length }}</td>
+        <td>{{ pb.fina_points }}</td>
+        <td>{{ pb.date }}</td>
+        <td>{{ pb.city }}</td>
+        <td>{{ pb.meet_name }}</td>
+    </tr>
     {% endfor %}
-</ul>
+</table>
 {% endif %}
 
 <h3>Training Sessions</h3>
