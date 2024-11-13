@@ -24,6 +24,15 @@ class TrainingSession(db.Model):
     time = db.Column(db.Time, nullable=False)
     path = db.Column(db.String(120), nullable=False)
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'date': self.date.strftime('%d-%m-%Y'),
+            'time': self.time.strftime('%H:%M:%S'),
+            'path': self.path,
+        }
+
 """class TrainingSection(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     training_session_id = db.Column(db.Integer, db.ForeignKey('trainingsession.id'), nullable=False)

@@ -52,8 +52,8 @@ def upload():
 
             # Turn the date from request.form into a python date object
             date = request.form['date']
-            date = date.replace("-", "")
-            date = datetime.datetime.strptime(date, "%Y%m%d").date()
+            date = date.replace("/", "")
+            date = datetime.datetime.strptime(date, "%d%m%Y").date()
 
             # Turn the time from request.form into a python time object
             time = request.form['time']
@@ -109,4 +109,11 @@ def fetch(session_id):
         return send_file(session.path, mimetype='image/gif')
     else:
         return 'no session found', 404
+
+@training_sessions.route('/fetch_sessions', methods=['POST'])
+@login_required
+def fetch_sessions():
+    # Get the sessions and return them to the js file
+    sessions = TrainingSession.query.filter_by(user_id=current_user.id).all()
+    return jsonify(sessions=[session.to_dict() for session in sessions]), 200
 

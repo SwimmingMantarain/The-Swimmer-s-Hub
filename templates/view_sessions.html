@@ -3,7 +3,14 @@
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
 
-<p>Click the session date to view the session</p>
+<h1>Click the session date to view the session</h1>
+<h2>This Week's</h2>
+<div id="current-week"></div>
+<br/>
+<h2>This Month's</h2>
+<div id="current-month"></div>
+<br/>
+<h2>All Training Sessions</h2>
 <ul>
     {% for session in sessions %}
     <li>
@@ -35,5 +42,5 @@
 </div>
 
 <script src="{{ url_for('static', filename='js/session_modal.js') }}"></script>
-
+<script src="{{ url_for('static', filename='js/order_sessions.js') }}"></script>
 {% endblock %}
