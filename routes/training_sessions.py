@@ -117,3 +117,9 @@ def fetch_sessions():
     sessions = TrainingSession.query.filter_by(user_id=current_user.id).all()
     return jsonify(sessions=[session.to_dict() for session in sessions]), 200
 
+@training_sessions.route('/fetch_username', methods=['POST'])
+@login_required
+def fetch_username():
+    # Get the username and return it to the js file
+    return jsonify(username=current_user.username), 200
+
