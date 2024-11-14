@@ -15,8 +15,8 @@ async function fetchUsername() {
         const response = await fetch('/fetch_username', {
             method: 'POST',
         });
-        const data = await response.json();
-        return data
+        const { username } = await response.json();
+        return username
         
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
@@ -24,7 +24,7 @@ async function fetchUsername() {
 }
 window.onload = function () {
     prom = fetchSessions();
-    prom.then(function (obj) {
+    prom.then(async function (obj) {
         let sessions = obj.sessions;
         let today = new Date();
         let current_month = today.getMonth() + 1;
@@ -36,10 +36,7 @@ window.onload = function () {
             let week = getCurrentWeekNumberFromDate(year, month, day);
             let id = sessions[i].id;
 
-            let data = fetchUsername();
-            data.then(function (obj) {
-                PromiseRejectionEvent.username
-            })
+            const username = await fetchUsername();
 
             let session_html = `
                 <li>

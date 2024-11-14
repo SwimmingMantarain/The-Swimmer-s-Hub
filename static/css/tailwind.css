@@ -3,4 +3,4 @@
 @tailwind utilities;
 @import "./index.css";
 @import "./profile.css";
-/*@import "./view_sessions.css";*/
+@import "./view_sessions.css";
