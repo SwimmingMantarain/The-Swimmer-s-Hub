@@ -21,3 +21,132 @@ a {
     color: #3ea8f2;
     text-shadow: 0 0 15px;
 }
+
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background: radial-gradient(circle at center, #0a0f23, #07101a, #020409);
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+/* Bubble Gradient Background Effect */
+body::before {
+    content: '';
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background: radial-gradient(circle, rgba(58, 170, 245, 0.2), transparent 40%),
+                radial-gradient(circle, rgba(34, 116, 207, 0.3), transparent 30%),
+                radial-gradient(circle, rgba(12, 80, 155, 0.3), transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0; /* Initial state for fade-in */
+}
+
+@keyframe bubbleGradient {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Floating Bubbles */
+.bubble {
+    position: absolute;
+    z-index: -1;
+    bottom: -100px;
+    width: 20px;
+    height: 20px;
+    background: rgba(58, 170, 245, 0.5);
+    border-radius: 50%;
+    animation: rise 10s infinite ease-in;
+    pointer-events: none;
+    opacity: 0;
+}
+
+@keyframes rise {
+    0% {
+        transform: translateY(0);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-120vh);
+        opacity: 0;
+    }
+}
+
+/* Smaller Bubbles */
+.bubble::before {
+    content: '';
+    position: absolute;
+    opacity: 0;
+    top: -5px;
+    left: -5px;
+    width: 10px;
+    height: 10px;
+    background: rgba(34, 116, 207, 0.4);
+    border-radius: 50%;
+}
+
+/* Header */
+h1 {
+    text-align: center;
+    font-size: 2.5em;
+    color: #61dafb;
+    margin: 20px 0;
+    text-shadow: 0 0 15px rgba(97, 218, 251, 0.8);
+}
+
+h2 {
+    text-align: center;
+    font-size: 1.5em;
+    color: #61dafb;
+    margin: 20px 0;
+    text-shadow: 0 0 15px rgba(97, 218, 251, 0.8);
+}
+
+/* Fieldsets */
+fieldset {
+    border: 2px solid #3ea8f2;
+    border-radius: 10px;
+    padding: 15px 20px;
+    background: linear-gradient(145deg, #0a203a, #09172b);
+    box-shadow: 4px 4px 15px #020a12, -4px -4px 15px #133d5c;
+    position: relative;
+    overflow: visible;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    width: 100%;
+    max-width: max-content;
+}
+
+fieldset legend {
+    user-select: none;
+    cursor: pointer;
+    font-weight: bold;
+    color: #3ea8f2;
+    padding: 0 10px;
+    background-color: #0c1e2f;
+    border-radius: 5px;
+    box-shadow: 0 0 12px rgba(62, 168, 242, 0.5);
+}
+
+fieldset:hover {
+    transform: translateY(-5px);
+    background: linear-gradient(145deg, #123553, #102b44);
+    box-shadow: 6px 6px 20px #02121b, -6px -6px 20px #145073;
+}

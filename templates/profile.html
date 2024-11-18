@@ -1,27 +1,32 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>{{ user.username }}'s Profile</h2>
+<br />
 
 {% if pbs %}
-<table>
-    {% for pb in pbs %}
-    <tr>
-        <td>{{ pb.event_name }}</td>
-        <td>{{ pb.time }}</td>
-        <td>{{ pb.course_length }}</td>
-        <td>{{ pb.fina_points }}</td>
-        <td>{{ pb.date }}</td>
-        <td>{{ pb.city }}</td>
-        <td>{{ pb.meet_name }}</td>
-    </tr>
-    {% endfor %}
-</table>
+<fieldset>
+    <legend>Personal Bests</legend>
+    <table>
+        {% for pb in pbs %}
+        <tr>
+            <td>{{ pb.event_name }}</td>
+            <td>{{ pb.time }}</td>
+            <td>{{ pb.course_length }}</td>
+            <td>{{ pb.fina_points }}</td>
+            <td>{{ pb.date }}</td>
+            <td>{{ pb.city }}</td>
+            <td>{{ pb.meet_name }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</fieldset>
 {% endif %}
 
-<h3>Training Sessions</h3>
-<div>
-    <a href="{{ url_for('training_sessions.upload') }}">Upload Session</a> ||
-    <a href="{{ url_for('training_sessions.view') }}">View Sessions</a>
-</div>
+<fieldset>
+    <legend>Actions</legend>
+    <div>
+        <a href="{{ url_for('training_sessions.upload') }}">Upload Session</a> ||
+        <a href="{{ url_for('training_sessions.view') }}">View Sessions</a>
+    </div>
+</fieldset>
 {% endblock %}
