@@ -53,7 +53,7 @@ def upload():
             # Turn the date from request.form into a python date object
             date = request.form['date']
             date = date.replace("/", "")
-            date = datetime.datetime.strptime(date, "%d%m%Y").date()
+            date = datetime.datetime.strptime(date, "%m%d%Y").date()
 
             # Turn the time from request.form into a python time object
             time = request.form['time']
