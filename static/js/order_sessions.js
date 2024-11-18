@@ -39,14 +39,12 @@ window.onload = function () {
             const username = await fetchUsername();
 
             let session_html = `
-                <li>
                     <div class="session-container" id="${id}" onclick="openModal('${id}')">
                             ${sessions[i].date} @ ${sessions[i].time}
                             <form method="POST" action="/delete_session/${username}/${id}">
                                 <button type="submit">Delete</button>
                             </form>
                     </div>
-                </li>
             `;
 
             if (year == today.getFullYear()) {
@@ -85,4 +83,49 @@ function getCurrentWeekNumber() {
     const weekNumber = Math.ceil((days + startOfYear.getDay() + 1) / 7);
     return weekNumber;
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const body = document.body;
+
+    for (let i = 0; i < 20; i++) {
+        const bubble = document.createElement("div");
+        bubble.className = "bubble";
+        bubble.style.left = `${Math.random() * 100}%`;
+        bubble.style.animationDelay = `${Math.random() * 10}s`;
+        bubble.style.animationDuration = `${5 + Math.random() * 5}s`;
+        body.appendChild(bubble);
+    }
+});
+
+// JavaScript to toggle minimize/maximize functionality for fieldsets
+document.addEventListener("DOMContentLoaded", () => {
+    const fieldsets = document.querySelectorAll(".session-field");
+
+    fieldsets.forEach(fieldset => {
+        const legend = fieldset.querySelector("legend");
+
+        // Add click event to the legend
+        legend.addEventListener("click", () => {
+            const content = Array.from(fieldset.children).filter(child => child !== legend);
+
+            content.forEach(element => {
+                if (element.style.display === "none") {
+                    element.style.display = "";
+                    legend.style.color = "#338ab3"; // Reset to theme color
+                    legend.style.backgroundColor = "#001526";
+                    legend.style.boxShadow = "0 0 10px rgba(51, 138, 179, 0.5)";
+                } else {
+                    element.style.display = "none";
+                    legend.style.color = "#ff6f61"; // Highlight legend when minimized
+                    legend.style.backgroundColor = "#002240";
+                    legend.style.boxShadow = "0 0 10px rgba(255, 111, 97, 0.8)";
+                }
+            });
+        });
+
+        // Start with fieldset expanded
+        fieldset.style.overflow = "hidden";
+    });
+});
+
 

@@ -2,4 +2,4 @@
 __pycache__/
 instance/
 node_modules/
-static/uploads/
+static/uploads/*

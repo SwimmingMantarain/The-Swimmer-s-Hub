@@ -8,6 +8,7 @@
     <!-- Modal content -->
     <div class="modal-content">
         <span class="close">&times;</span>
+        <br />
         <div id="session-content">
             <div id="session-info">
                 <p></p>
@@ -18,41 +19,41 @@
 
 </div>
 
-<h1>Click the session date to view the session</h1>
-<br/>
-<br/>
+<h2>Click the session date to view the session</h2>
+<br class="main-width"/>
 
-<fieldset class="session-field">
-    <legend>This Week's</legend>
-    <div id="current-week"></div>
-</fieldset><br>
+<div class="sessions">
+    <fieldset class="session-field">
+        <legend>This Week's</legend>
+        <div id="current-week"></div>
+    </fieldset><br>
 
-<fieldset class="session-field">
-    <legend>This Month's</legend>
-    <div id="current-month"></div>
-</fieldset><br>
+    <fieldset class="session-field">
+        <legend>This Month's</legend>
+        <div id="current-month"></div>
+    </fieldset><br>
 
-<fieldset class="session-field">
-    <legend>Last Month's</legend>
-    <div id="last-month"></div>
-</fieldset><br>
+    <fieldset class="session-field">
+        <legend>Last Month's</legend>
+        <div id="last-month"></div>
+    </fieldset><br>
 
-<fieldset class="session-field">
-    <legend>This Year's</legend>
-    <div id="current-year"></div>
-</fieldset><br>
+    <fieldset class="session-field">
+        <legend>This Year's</legend>
+        <div id="current-year"></div>
+    </fieldset><br>
 
-<fieldset class="session-field">
-    <legend>Last Year's</legend>
-    <div id="last-year"></div>
-</fieldset><br>
+    <fieldset class="session-field">
+        <legend>Last Year's</legend>
+        <div id="last-year"></div>
+    </fieldset><br>
 
-<fieldset class="session-field">
-    <legend>All Training Sessions</legend>
-    <div id="all-sessions"></div>
-</fieldset>
+    <fieldset class="session-field">
+        <legend>All Training Sessions</legend>
+        <div id="all-sessions"></div>
+    </fieldset>
+</div>
 
 <script src="{{ url_for('static', filename='js/session_modal.js') }}"></script>
 <script src="{{ url_for('static', filename='js/order_sessions.js') }}"></script>
 {% endblock %}
-

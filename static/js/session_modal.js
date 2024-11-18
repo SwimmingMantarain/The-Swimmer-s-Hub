@@ -7,7 +7,7 @@ function openModal(session_id) {
         tag.src = image_url;
     });
 
-    modal.style.display = "block";
+    modal.style.display = "grid";
 
 }
 

@@ -11,3 +11,13 @@
 .link-button:hover {
     color: darkblue; /* Change color on hover */
 }
+
+header {
+    text-align: center;
+    align-items: center;
+}
+
+a {
+    color: #3ea8f2;
+    text-shadow: 0 0 15px;
+}
