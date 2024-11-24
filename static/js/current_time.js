@@ -7,10 +7,11 @@ window.onload = function() {
         var timeParts = timeNoMeridiem.split(':');
         var hours = Number(timeParts[0]);
         var minutes = timeParts[1];
+        var seconds = timeParts[2];
         if (displayTime.includes('PM')) {
             hours += 12;
         }
-        timeNoMeridiem = hours + ':' + minutes;
+        timeNoMeridiem = hours + ':' + minutes + ":" + seconds;
 
         document.getElementById('date').value = displayDate;
         document.getElementById('time').value = timeNoMeridiem;
