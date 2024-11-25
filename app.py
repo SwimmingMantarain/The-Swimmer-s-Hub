@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_login import LoginManager
 from flask_migrate import Migrate
-from models import db, User
+from models import db, User, TrainingSession, PersonalBests
 from routes.auth import auth
 from routes.training_sessions import training_sessions, UPLOAD_FOLDER
 from routes.user_profile import user_profile
