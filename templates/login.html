@@ -11,8 +11,8 @@
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>
     </div>
-    <button type="submit">Login</button>
+    <button type="submit" style="align-self: center;">Login</button>
 </form>
 
-<p>Don't have an account? <a href="{{ url_for('auth.register') }}">Register here</a></p>
+<p style="align-self: center;">Don't have an account? <a href="{{ url_for('auth.register') }}">Register here</a></p>
 {% endblock %}

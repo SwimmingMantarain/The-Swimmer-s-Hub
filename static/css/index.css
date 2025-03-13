@@ -1,3 +1,9 @@
+html {
+    scroll-behavior: smooth;
+    overflow: hidden;
+    height: 100%;
+}
+
 .link-button {
     background: none; /* Remove background */
     border: none; /* Remove border */
@@ -34,6 +40,17 @@ body {
     align-items: center;
     min-height: 100vh;
     overflow-y: auto;
+    position: relative;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
     position: relative;
 }
 
@@ -149,4 +166,53 @@ fieldset:hover {
     transform: translateY(-5px);
     background: linear-gradient(145deg, #123553, #102b44);
     box-shadow: 6px 6px 20px #02121b, -6px -6px 20px #145073;
+}
+
+/* flask flashing */
+
+.flashes {
+    position: fixed;
+    background-color: #0a203a;
+    color: #3ea8f2;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 12px rgba(62, 168, 242, 0.5);
+    top: 20px;
+    right: 20px;
+    z-index: 999;
+}
+
+/* input stuff */
+
+input {
+    background: linear-gradient(145deg, #0a203a, #09172b);
+    border: 2px solid #3ea8f2;
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: #3ea8f2;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+button {
+    background: linear-gradient(145deg, #0a203a, #09172b);
+    border: 2px solid #3ea8f2;
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: #3ea8f2;
+    cursor: pointer;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 10px;
+    background: linear-gradient(145deg, #0a203a, #09172b);
+    border-radius: 10px;
+    box-shadow: 4px 4px 15px #020a12, -4px -4px 15px #133d5c;
+    color: #3ea8f2;
 }
