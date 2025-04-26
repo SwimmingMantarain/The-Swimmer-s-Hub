@@ -1,32 +1,62 @@
-{% extends 'base.html' %}
-
-{% block content %}
-<br />
-
-{% if pbs %}
-<fieldset>
-    <legend>Personal Bests</legend>
-    <table>
-        {% for pb in pbs %}
-        <tr>
-            <td>{{ pb.event_name }}</td>
-            <td>{{ pb.time }}</td>
-            <td>{{ pb.course_length }}</td>
-            <td>{{ pb.fina_points }}</td>
-            <td>{{ pb.date }}</td>
-            <td>{{ pb.city }}</td>
-            <td>{{ pb.meet_name }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-</fieldset>
-{% endif %}
-
-<fieldset>
-    <legend>Actions</legend>
-    <div>
-        <a href="{{ url_for('training_sessions.upload') }}">Upload Session</a> ||
-        <a href="{{ url_for('training_sessions.view') }}">View Sessions</a>
+{% extends 'base.html' %} {% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}"
+<div class="profile-container">
+    <div class="profile-header">
+        <h2>{{ user.first_name }} {{ user.last_name }}'s Profile</h2>
+        <div class="swimmer-info">Swimmer ID: {{ user.swimrankings_id }}</div>
     </div>
-</fieldset>
+
+    {% if pbs %}
+    <fieldset class="profile-section">
+        <legend>Personal Bests</legend>
+        <table class="personal-bests">
+            <thead>
+                <tr>
+                    <th>Event</th>
+                    <th>Course</th>
+                    <th>Time</th>
+                    <th>Date</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pb in pbs %}
+                <tr>
+                    <td>{{ pb.event }}</td>
+                    <td>{{ pb.course }}</td>
+                    <td>{{ pb.time }}</td>
+                    <td>{{ pb.date }}</td>
+                    <td>{{ pb.city }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </fieldset>
+    {% else %}
+    <fieldset class="profile-section">
+        <legend>Personal Bests</legend>
+        <div class="empty-state">No personal best times available</div>
+    </fieldset>
+    {% endif %}
+
+    <fieldset class="profile-section">
+        <legend>Recent Training</legend>
+        {% if sessions %}
+        <!-- You can add training session display here -->
+        <div>Training data available</div>
+        {% else %}
+        <div class="empty-state">No training sessions recorded yet</div>
+        {% endif %}
+    </fieldset>
+
+    <fieldset class="profile-section">
+        <legend>Actions</legend>
+        <div class="action-buttons">
+            <a href="{{ url_for('training_sessions.upload') }}"
+                >Upload Session</a
+            >
+            <a href="{{ url_for('training_sessions.view') }}">View Sessions</a>
+        </div>
+    </fieldset>
+</div>
 {% endblock %}

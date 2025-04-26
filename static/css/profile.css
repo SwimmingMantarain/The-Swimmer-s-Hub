@@ -1,0 +1,150 @@
+/* Profile-specific styles */
+.profile-container {
+    width: 100%;
+    max-width: 800px;
+}
+
+/* Enhanced table styling */
+table.personal-bests {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 10px 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+table.personal-bests thead th {
+    background: linear-gradient(145deg, #123553, #0c2741);
+    color: #61dafb;
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: bold;
+    text-shadow: 0 0 8px rgba(97, 218, 251, 0.5);
+    border-bottom: 2px solid #3ea8f2;
+}
+
+table.personal-bests tbody tr {
+    transition: all 0.3s ease;
+}
+
+table.personal-bests tbody tr:nth-child(odd) {
+    background: rgba(10, 32, 58, 0.5);
+}
+
+table.personal-bests tbody tr:nth-child(even) {
+    background: rgba(9, 23, 43, 0.5);
+}
+
+table.personal-bests tbody tr:hover {
+    background: rgba(62, 168, 242, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+table.personal-bests td {
+    padding: 10px 15px;
+    border-bottom: 1px solid rgba(62, 168, 242, 0.2);
+}
+
+table.personal-bests td:first-child {
+    font-weight: bold;
+    color: #61dafb;
+}
+
+/* Action buttons styling */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 15px 0;
+}
+
+.action-buttons a {
+    display: inline-block;
+    padding: 10px 20px;
+    background: linear-gradient(145deg, #0c2741, #0a203a);
+    border: 1px solid #3ea8f2;
+    border-radius: 6px;
+    color: #61dafb;
+    text-decoration: none;
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(97, 218, 251, 0.5);
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(62, 168, 242, 0.2);
+}
+
+.action-buttons a:hover {
+    background: linear-gradient(145deg, #123553, #102b44);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(62, 168, 242, 0.3);
+    text-shadow: 0 0 8px rgba(97, 218, 251, 0.8);
+}
+
+/* Page introduction section */
+.profile-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.profile-header h2 {
+    margin-bottom: 10px;
+}
+
+.profile-header .swimmer-info {
+    font-size: 1.1em;
+    color: #3ea8f2;
+    opacity: 0.9;
+}
+
+/* Fieldset enhancements */
+fieldset.profile-section {
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+/* Empty state message */
+.empty-state {
+    text-align: center;
+    padding: 20px;
+    color: rgba(62, 168, 242, 0.7);
+    font-style: italic;
+}
+
+/* Animation for loading in content */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.profile-section {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.profile-section:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    table.personal-bests {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .action-buttons a {
+        width: 80%;
+    }
+}

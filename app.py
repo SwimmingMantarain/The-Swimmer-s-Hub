@@ -1,12 +1,11 @@
 from flask import Flask
 from flask_login import LoginManager
-from flask_migrate import Migrate
 from models import db, User, TrainingSession, PersonalBests
 from routes.auth import auth
 from routes.training_sessions import training_sessions, UPLOAD_FOLDER
 from routes.user_profile import user_profile
 from routes.defaults import defaults
-import config 
+import config
 
 app = Flask(__name__)
 app.config.from_object(config.Config)
@@ -17,9 +16,6 @@ db.init_app(app)
 
 with app.app_context():
     db.create_all()
-
-# Initialize Flask-Migrate
-migrate = Migrate(app, db)
 
 # Initialize Flask-Login
 login_manager = LoginManager()

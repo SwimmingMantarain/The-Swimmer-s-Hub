@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, login_required, current_user
 from models import db, User
 from werkzeug.security import generate_password_hash, check_password_hash
+from services import swimrankings
 
 auth = Blueprint('auth', __name__)
 
@@ -23,7 +24,11 @@ def register():
         username = request.form['username']
         email = request.form['email']
         password = request.form['password']
-        swimrankings_id = request.form.get('swimrankings_id')
+
+        first_name = request.form['first_name']
+        last_name = request.form['last_name']
+
+        swimrankings_id = swimrankings.get_swimmer_id(first_name, last_name)
 
         # Check if email or username already exists
         if User.query.filter_by(email=email).first() or User.query.filter_by(username=username).first():
