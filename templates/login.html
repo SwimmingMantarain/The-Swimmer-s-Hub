@@ -1,18 +1,29 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
+<div class="auth-container">
+    <h2><i class="form-icon">🔑</i> Login</h2>
+    <form method="POST" class="auth-form">
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                autocomplete="email"
+            />
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required />
+        </div>
+        <button type="submit" class="auth-button">Log In</button>
+    </form>
 
-{% block content %}
-<h2>Login</h2>
-<form method="POST">
-    <div>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+    <div class="auth-footer">
+        <p>
+            Don't have an account?
+            <a href="{{ url_for('auth.register') }}">Register here</a>
+        </p>
     </div>
-    <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-    </div>
-    <button type="submit" style="align-self: center;">Login</button>
-</form>
-
-<p style="align-self: center;">Don't have an account? <a href="{{ url_for('auth.register') }}">Register here</a></p>
+</div>
 {% endblock %}

@@ -1,52 +1,55 @@
-{% extends "base.html" %}
-
-{% block content %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/view_sessions.css') }}">
+{% extends "base.html" %} {% block content %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/view_sessions.css') }}"
+/>
 
 <div id="myModal" class="modal">
-
-    <!-- Modal content -->
     <div class="modal-content">
         <span class="close">&times;</span>
-        <br />
         <div id="session-content">
             <div id="session-info">
-                <p></p>
+                <h3>Training Session</h3>
+                <p class="session-details"></p>
             </div>
-            <img id="session-image" src="">
+            <img id="session-image" src="" alt="Training session image" />
         </div>
     </div>
-
 </div>
 
 <h2>Click the session date to view the session</h2>
-<br class="main-width"/>
+<br class="main-width" />
 
 <div class="sessions">
     <fieldset class="session-field">
         <legend>This Week's</legend>
         <div id="current-week"></div>
-    </fieldset><br>
+    </fieldset>
+    <br />
 
     <fieldset class="session-field">
         <legend>This Month's</legend>
         <div id="current-month"></div>
-    </fieldset><br>
+    </fieldset>
+    <br />
 
     <fieldset class="session-field">
         <legend>Last Month's</legend>
         <div id="last-month"></div>
-    </fieldset><br>
+    </fieldset>
+    <br />
 
     <fieldset class="session-field">
         <legend>This Year's</legend>
         <div id="current-year"></div>
-    </fieldset><br>
+    </fieldset>
+    <br />
 
     <fieldset class="session-field">
         <legend>Last Year's</legend>
         <div id="last-year"></div>
-    </fieldset><br>
+    </fieldset>
+    <br />
 
     <fieldset class="session-field">
         <legend>All Training Sessions</legend>

@@ -28,9 +28,42 @@ a {
     text-shadow: 0 0 15px;
 }
 
+.main-nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px;
+    background: rgba(10, 32, 58, 0.5);
+    border-radius: 30px;
+    margin: 0 auto 20px;
+    max-width: 500px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.nav-link {
+    padding: 8px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    color: #61dafb;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.nav-link:hover {
+    background: rgba(62, 168, 242, 0.2);
+    transform: translateY(-2px);
+    text-shadow: 0 0 8px rgba(97, 218, 251, 0.8);
+}
+
+.nav-icon {
+    font-size: 1.2em;
+}
+
 /* General Styles */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: "Arial", sans-serif;
     background: radial-gradient(circle at center, #0a0f23, #07101a, #020409);
     color: #ffffff;
     margin: 0;
@@ -44,27 +77,32 @@ body {
 }
 
 main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    width: 100%;
-    max-width: 900px;
-    margin: 20px auto;
-    position: relative;
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Bubble Gradient Background Effect */
 body::before {
-    content: '';
+    content: "";
     position: fixed;
     width: 200%;
     height: 200%;
     top: -50%;
     left: -50%;
-    background: radial-gradient(circle, rgba(58, 170, 245, 0.2), transparent 40%),
-                radial-gradient(circle, rgba(34, 116, 207, 0.3), transparent 30%),
-                radial-gradient(circle, rgba(12, 80, 155, 0.3), transparent 50%);
+    background:
+        radial-gradient(circle, rgba(58, 170, 245, 0.2), transparent 40%),
+        radial-gradient(circle, rgba(34, 116, 207, 0.3), transparent 30%),
+        radial-gradient(circle, rgba(12, 80, 155, 0.3), transparent 50%);
     pointer-events: none;
     z-index: -1;
     opacity: 0; /* Initial state for fade-in */
@@ -107,9 +145,65 @@ body::before {
     }
 }
 
+/* Animation enhancements */
+.animate-bg::before {
+    animation: bubbleGradient 5s forwards;
+}
+
+.animate-element {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Enhanced bubble styling */
+.bubble {
+    background: radial-gradient(
+        circle at 30% 30%,
+        rgba(97, 218, 251, 0.6),
+        rgba(62, 168, 242, 0.2)
+    );
+    box-shadow: 0 0 10px rgba(97, 218, 251, 0.3);
+    transform-origin: center;
+}
+
+.bubble:nth-child(even) {
+    animation-name: rise-wobble;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes rise-wobble {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.7;
+    }
+    50% {
+        transform: translateY(-60vh) translateX(20px);
+        opacity: 0.5;
+    }
+    75% {
+        transform: translateY(-90vh) translateX(-20px);
+        opacity: 0.3;
+    }
+    100% {
+        transform: translateY(-120vh) translateX(0);
+        opacity: 0;
+    }
+}
+
 /* Smaller Bubbles */
 .bubble::before {
-    content: '';
+    content: "";
     position: absolute;
     opacity: 0;
     top: -5px;
@@ -143,10 +237,14 @@ fieldset {
     border-radius: 10px;
     padding: 15px 20px;
     background: linear-gradient(145deg, #0a203a, #09172b);
-    box-shadow: 4px 4px 15px #020a12, -4px -4px 15px #133d5c;
+    box-shadow:
+        4px 4px 15px #020a12,
+        -4px -4px 15px #133d5c;
     position: relative;
     overflow: visible;
-    transition: transform 0.3s ease, background-color 0.3s ease;
+    transition:
+        transform 0.3s ease,
+        background-color 0.3s ease;
     width: 100%;
     max-width: max-content;
 }
@@ -165,21 +263,29 @@ fieldset legend {
 fieldset:hover {
     transform: translateY(-5px);
     background: linear-gradient(145deg, #123553, #102b44);
-    box-shadow: 6px 6px 20px #02121b, -6px -6px 20px #145073;
+    box-shadow:
+        6px 6px 20px #02121b,
+        -6px -6px 20px #145073;
 }
 
 /* flask flashing */
 
 .flashes {
-    position: fixed;
-    background-color: #0a203a;
-    color: #3ea8f2;
-    padding: 10px 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 12px rgba(62, 168, 242, 0.5);
-    top: 20px;
-    right: 20px;
-    z-index: 999;
+    animation: slideIn 0.5s ease-out forwards;
+    border-left: 4px solid #3ea8f2;
+    list-style-type: none;
+    padding: 15px 20px;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
 /* input stuff */
@@ -190,29 +296,147 @@ input {
     border-radius: 5px;
     padding: 5px 10px;
     color: #3ea8f2;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
+    transition:
+        background-color 0.3s ease,
+        border-color 0.3s ease;
 }
 
 button {
-    background: linear-gradient(145deg, #0a203a, #09172b);
-    border: 2px solid #3ea8f2;
-    border-radius: 5px;
-    padding: 5px 10px;
-    color: #3ea8f2;
+    padding: 10px 20px;
+    background: linear-gradient(145deg, #0c2741, #0a203a);
+    border: 1px solid #3ea8f2;
+    border-radius: 8px;
+    color: #61dafb;
+    font-weight: bold;
     cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow:
+        3px 3px 7px #020a12,
+        -3px -3px 7px #133d5c;
+}
+
+button:hover {
+    background: linear-gradient(145deg, #123553, #102b44);
+    transform: translateY(-2px);
+    box-shadow:
+        4px 4px 10px #020a12,
+        -4px -4px 10px #133d5c;
 }
 
 form {
+    width: 100%;
+    max-width: 400px;
+    background: linear-gradient(145deg, #0b2239, #0a1e32);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow:
+        5px 5px 15px #020a12,
+        -5px -5px 15px #133d5c;
+}
+
+form div {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #61dafb;
+    text-shadow: 0 0 5px rgba(97, 218, 251, 0.5);
+}
+
+form input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    background: rgba(10, 32, 58, 0.3);
+    border: 1px solid #3ea8f2;
+    color: white;
+    box-shadow:
+        inset 2px 2px 5px #020a12,
+        inset -2px -2px 5px #133d5c;
+    transition: all 0.3s ease;
+}
+
+form input:focus {
+    outline: none;
+    border-color: #61dafb;
+    box-shadow:
+        0 0 10px rgba(97, 218, 251, 0.5),
+        inset 2px 2px 5px #020a12,
+        inset -2px -2px 5px #133d5c;
+}
+
+/* Auth forms styling */
+.auth-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
     width: 100%;
-    max-width: 400px;
+    max-width: 450px;
     margin: 0 auto;
-    padding: 10px;
-    background: linear-gradient(145deg, #0a203a, #09172b);
-    border-radius: 10px;
-    box-shadow: 4px 4px 15px #020a12, -4px -4px 15px #133d5c;
-    color: #3ea8f2;
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.auth-container h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.form-icon {
+    font-style: normal;
+}
+
+.auth-form {
+    width: 100%;
+    padding: 25px;
+    border-radius: 15px;
+    background: linear-gradient(145deg, #0c2741, #0a203a);
+    box-shadow:
+        5px 5px 15px rgba(0, 0, 0, 0.3),
+        -5px -5px 15px rgba(62, 168, 242, 0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.auth-button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    font-size: 1.1em;
+    background: linear-gradient(145deg, #3ea8f2, #2c81bf);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
+}
+
+.auth-button:hover {
+    background: linear-gradient(145deg, #61dafb, #3ea8f2);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(62, 168, 242, 0.4);
+}
+
+.auth-footer {
+    margin-top: 20px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.auth-footer a {
+    color: #61dafb;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.auth-footer a:hover {
+    text-shadow: 0 0 8px rgba(97, 218, 251, 0.8);
 }
