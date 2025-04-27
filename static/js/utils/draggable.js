@@ -1,5 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
   const draggableElements = document.querySelectorAll(".profile-section");
+  const container = document.querySelector(".profile-container");
+
+  // Get container boundaries for constraining drag
+  const containerRect = container ? container.getBoundingClientRect() : null;
+  const containerLeft = containerRect ? containerRect.left : 0;
+  const containerRight = containerRect
+    ? containerRect.right
+    : window.innerWidth;
 
   // Load any saved positions from localStorage
   loadPositions();
@@ -14,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
       pos3 = 0,
       pos4 = 0;
     let isDragging = false;
+    let initialRect = null; // Store initial position/size
 
     // Use the legend as the handle for dragging
     const header = element.querySelector("legend");
@@ -27,7 +36,8 @@ document.addEventListener("DOMContentLoaded", function () {
       header.onmousedown = dragMouseDown;
 
       // Double click to reset position
-      header.addEventListener("dblclick", function () {
+      header.addEventListener("dblclick", function (e) {
+        e.stopPropagation(); // Prevent bubbling
         resetPosition(element);
       });
     } else {
@@ -37,6 +47,9 @@ document.addEventListener("DOMContentLoaded", function () {
     function dragMouseDown(e) {
       e = e || window.event;
       e.preventDefault();
+
+      // Store initial element rectangle
+      initialRect = element.getBoundingClientRect();
 
       // Get the mouse cursor position at startup
       pos3 = e.clientX;
@@ -67,14 +80,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // Set the element's new position
       if (element.style.position !== "absolute") {
-        const rect = element.getBoundingClientRect();
         element.style.position = "absolute";
-        element.style.top = rect.top + window.scrollY + "px";
-        element.style.left = rect.left + "px";
-        element.style.width = rect.width - 40 + "px"; // Adjust width for padding
+        element.style.top = initialRect.top + window.scrollY + "px";
+        element.style.left = initialRect.left + "px";
+        element.style.width = initialRect.width - 40 + "px"; // Adjust width for padding
       } else {
-        element.style.top = element.offsetTop - pos2 + "px";
-        element.style.left = element.offsetLeft - pos1 + "px";
+        // Calculate new position
+        const newTop = element.offsetTop - pos2;
+        const newLeft = element.offsetLeft - pos1;
+
+        // Apply new position with boundaries check
+        element.style.top = newTop + "px";
+
+        // Constrain horizontal movement to container width
+        if (containerRect) {
+          const elementRect = element.getBoundingClientRect();
+          if (newLeft < containerLeft) {
+            element.style.left = containerLeft + "px";
+          } else if (newLeft + elementRect.width > containerRight) {
+            element.style.left = containerRight - elementRect.width + "px";
+          } else {
+            element.style.left = newLeft + "px";
+          }
+        } else {
+          element.style.left = newLeft + "px";
+        }
       }
     }
 
@@ -155,8 +185,6 @@ document.addEventListener("DOMContentLoaded", function () {
   if (profileContainer) {
     const controlsDiv = document.createElement("div");
     controlsDiv.className = "layout-controls";
-    controlsDiv.style.cssText =
-      "position: fixed; bottom: 20px; right: 20px; z-index: 1001; display: flex; gap: 10px;";
 
     const resetButton = document.createElement("button");
     resetButton.textContent = "Reset Layout";
@@ -170,7 +198,7 @@ document.addEventListener("DOMContentLoaded", function () {
     helpText.innerHTML =
       "Tip: Drag sections by their headers. Double-click a header to reset its position.";
     helpText.style.cssText =
-      "position: fixed; bottom: 60px; right: 20px; color: #61dafb; font-size: 0.8em; max-width: 200px; text-align: right;";
+      "position: fixed; bottom: 60px; right: 20px; color: #61dafb; font-size: 0.8em; max-width: 200px; text-align: right; background: rgba(10, 32, 58, 0.7); padding: 8px; border-radius: 6px;";
 
     controlsDiv.appendChild(resetButton);
     profileContainer.appendChild(controlsDiv);
