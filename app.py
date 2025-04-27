@@ -1,10 +1,7 @@
 from flask import Flask
 from flask_login import LoginManager
-from models import db, User, TrainingSession, PersonalBests
-from routes.auth import auth
-from routes.training_sessions import training_sessions, UPLOAD_FOLDER
-from routes.user_profile import user_profile
-from routes.defaults import defaults
+from models import db, User
+from routes import auth, training_sessions, user_profile, defaults, UPLOAD_FOLDER
 import config
 
 app = Flask(__name__)

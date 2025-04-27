@@ -33,7 +33,7 @@ def upload():
             user_directory = os.path.join(UPLOAD_FOLDER, str(current_user.id))
             if not os.path.exists(user_directory):
                 os.makedirs(user_directory)
-            
+
             # Create a directory in the user's directory for the session date if it doesn't already exist
             session_directory = os.path.join(user_directory, request.form['date'])
             if not os.path.exists(session_directory):
@@ -69,7 +69,7 @@ def upload():
             file.save(filepath)
 
             return redirect(url_for('user_profile.profile', user_name=current_user.username))
-    return render_template('create_session.html', )
+    return render_template('training/create_session.html')
 
 @training_sessions.route('/delete_session/<username>/<session_id>', methods=['POST'])
 @login_required
@@ -89,7 +89,7 @@ def delete(username, session_id):
         db.session.commit()
 
         return redirect(url_for('user_profile.profile', user_name=current_user.username))
-    
+
     else:
         flash("Not your session")
         return redirect(url_for('user_profile.profile', user_name=current_user.username))
@@ -98,7 +98,7 @@ def delete(username, session_id):
 @login_required
 def view():
     sessions = TrainingSession.query.filter_by(user_id=current_user.id).all()
-    return render_template('view_sessions.html', user=current_user, sessions=sessions)
+    return render_template('training/view_sessions.html', user=current_user, sessions=sessions)
 
 @training_sessions.route('/fetch_session/<session_id>', methods=['GET'])
 @login_required
@@ -122,4 +122,3 @@ def fetch_sessions():
 def fetch_username():
     # Get the username and return it to the js file
     return jsonify(username=current_user.username), 200
-

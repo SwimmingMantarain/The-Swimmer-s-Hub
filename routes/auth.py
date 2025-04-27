@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, login_required, current_user
 from models import db, User
 from werkzeug.security import generate_password_hash, check_password_hash
-from services import swimrankings
+from services import get_swimmer_id
 
 auth = Blueprint('auth', __name__)
 
@@ -16,7 +16,7 @@ def login():
             login_user(user)
             return redirect(url_for('user_profile.profile', user_name=user.username))
         flash('Invalid email or password')
-    return render_template('login.html')
+    return render_template('auth/login.html')
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
@@ -28,7 +28,7 @@ def register():
         first_name = request.form['first_name']
         last_name = request.form['last_name']
 
-        swimrankings_id = swimrankings.get_swimmer_id(first_name, last_name)
+        swimrankings_id = get_swimmer_id(first_name, last_name)
 
         # Check if email or username already exists
         if User.query.filter_by(email=email).first() or User.query.filter_by(username=username).first():
@@ -44,7 +44,7 @@ def register():
         login_user(new_user)
         return redirect(url_for('user_profile.profile', user_name=new_user.username))
 
-    return render_template('register.html')
+    return render_template('auth/register.html')
 
 @auth.route('/logout')
 @login_required
