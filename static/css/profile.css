@@ -1,6 +1,6 @@
 .profile-container {
     width: 100%;
-    max-width: 900px;
+    max-width: 1200px;
     animation: fadeIn 0.5s ease-out forwards;
     padding: 0 15px;
     position: relative;
@@ -8,19 +8,30 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto auto;
-    gap: 20px;
-    height: calc(100vh - 180px); /* Adjust based on header height */
+    gap: 30px;
+    min-height: calc(100vh - 180px); /* Adjust based on header height */
+    height: auto;
 }
 
 .profile-section {
     user-select: none;
     overflow: auto;
-    height: 100%;
+    min-height: 300px; /* Set minimum height */
+    margin: 10px 0; /* Add vertical margin for more separation */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Enhanced shadow for depth */
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.profile-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
 }
 
 .profile-header {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px; /* Increased from 20px */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -28,7 +39,7 @@
 }
 
 .profile-avatar {
-    margin-bottom: 15px;
+    margin-bottom: 20px; /* Increased from 15px */
 }
 
 .avatar-circle {
@@ -52,18 +63,19 @@
 #pbs-section {
     grid-column: 1;
     grid-row: 2;
-    max-height: 100%;
+    max-height: 500px; /* Set maximum height */
 }
 
 #training-section {
     grid-column: 2;
     grid-row: 2;
-    max-height: 100%;
+    max-height: 500px; /* Set maximum height */
 }
 
 #actions-section {
     grid-column: 1 / span 2;
     grid-row: 3;
+    min-height: 120px; /* Reduced minimum height */
 }
 
 /* Table wrapper for responsive tables */
@@ -237,36 +249,32 @@
     border-color: #3ef261;
 }
 
+/* Responsive design updates */
 @media (max-width: 767px) {
     .profile-container {
         grid-template-columns: 1fr;
         grid-template-rows: auto auto auto auto;
         height: auto;
+        gap: 20px;
     }
 
     #pbs-section {
         grid-column: 1;
         grid-row: 2;
-        height: 35vh;
+        height: auto;
+        min-height: 300px;
     }
 
     #training-section {
         grid-column: 1;
         grid-row: 3;
-        height: 35vh;
+        height: auto;
+        min-height: 300px;
     }
 
     #actions-section {
         grid-column: 1;
         grid-row: 4;
-    }
-
-    .action-buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .action-btn {
-        width: 80%;
+        min-height: 100px;
     }
 }
