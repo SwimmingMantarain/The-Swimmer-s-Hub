@@ -3,33 +3,28 @@
     max-width: 900px;
     animation: fadeIn 0.5s ease-out forwards;
     padding: 0 15px;
-    position: relative; /* Added to ensure proper positioning context */
-    margin-bottom: 40px; /* Add space at bottom for fixed controls */
+    position: relative;
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto;
+    gap: 20px;
+    height: calc(100vh - 180px); /* Adjust based on header height */
 }
 
 .profile-section {
-    cursor: move;
     user-select: none;
-    max-height: 70vh; /* Limit maximum height */
-    overflow: auto; /* Add scrolling when content exceeds max height */
-    position: relative; /* Ensure proper positioning */
-}
-
-/* Fix for absolute positioning when dragging */
-.profile-section[style*="position: absolute"] {
-    max-width: 100%;
     overflow: auto;
-    margin: 0;
-    /* Prevent sections from being positioned outside viewable area */
-    max-height: 60vh;
+    height: 100%;
 }
 
 .profile-header {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    grid-column: 1 / span 2;
 }
 
 .profile-avatar {
@@ -53,25 +48,37 @@
     border: 2px solid rgba(62, 168, 242, 0.5);
 }
 
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 25px;
-    margin-bottom: 25px;
+/* Grid layout for dashboard */
+#pbs-section {
+    grid-column: 1;
+    grid-row: 2;
+    max-height: 100%;
+}
+
+#training-section {
+    grid-column: 2;
+    grid-row: 2;
+    max-height: 100%;
+}
+
+#actions-section {
+    grid-column: 1 / span 2;
+    grid-row: 3;
 }
 
 /* Table wrapper for responsive tables */
 .table-wrapper {
     width: 100%;
-    overflow-x: auto; /* Horizontal scrolling for wide tables */
+    overflow-x: auto;
     margin-bottom: 10px;
+    max-height: calc(100% - 30px); /* Account for legend height */
 }
 
 /* Table styling */
 .personal-bests {
     width: 100%;
     border-collapse: collapse;
-    min-width: 600px; /* Ensure minimum width for readability */
+    min-width: 600px;
 }
 
 .personal-bests th,
@@ -85,7 +92,7 @@
     background: rgba(10, 32, 58, 0.5);
     color: #61dafb;
     position: sticky;
-    top: 0; /* Make headers sticky when scrolling */
+    top: 0;
     z-index: 1;
 }
 
@@ -186,6 +193,7 @@
 
 .action-section {
     margin-top: 10px;
+    max-height: 150px; /* Limit height of action section */
 }
 
 .action-buttons {
@@ -229,53 +237,30 @@
     border-color: #3ef261;
 }
 
-/* Layout controls styling */
-.layout-controls {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1001;
-    display: flex;
-    gap: 10px;
-}
-
-.reset-layout-btn {
-    background: linear-gradient(145deg, #0c2741, #0a203a);
-    border: 1px solid #61dafb;
-    color: #61dafb;
-    padding: 8px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.reset-layout-btn:hover {
-    background: linear-gradient(145deg, #123553, #102b44);
-    transform: translateY(-2px);
-}
-
-/* Enhanced dragging appearance */
-.dragging {
-    border: 2px dashed #61dafb !important;
-    box-shadow: 0 0 15px rgba(97, 218, 251, 0.5) !important;
-}
-
-@media (min-width: 768px) {
-    .dashboard-grid {
-        grid-template-columns: 1fr 1fr;
+@media (max-width: 767px) {
+    .profile-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto;
+        height: auto;
     }
 
-    /* Fix for draggable sections to have better initial widths */
     #pbs-section {
-        width: calc(100% - 40px);
+        grid-column: 1;
+        grid-row: 2;
+        height: 35vh;
     }
 
     #training-section {
-        width: calc(100% - 40px);
+        grid-column: 1;
+        grid-row: 3;
+        height: 35vh;
     }
-}
 
-@media (max-width: 767px) {
+    #actions-section {
+        grid-column: 1;
+        grid-row: 4;
+    }
+
     .action-buttons {
         flex-direction: column;
         align-items: center;
@@ -283,11 +268,5 @@
 
     .action-btn {
         width: 80%;
-    }
-
-    /* Ensure proper stacking on mobile */
-    .profile-section[style*="position: absolute"] {
-        width: calc(100% - 40px) !important;
-        left: 20px !important;
     }
 }

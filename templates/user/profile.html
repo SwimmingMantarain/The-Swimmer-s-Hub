@@ -9,77 +9,77 @@
         <div class="profile-avatar">
             <div class="avatar-circle">{{ user.username[0] | upper }}</div>
         </div>
-        <h2>{{ user.first_name }} {{ user.last_name }}'s Profile</h2>
+        <h2>Your Profile</h2>
         {% if user.swimrankings_id %}
-        <div class="swimmer-info">Swimmer ID: {{ user.swimrankings_id }}</div>
+        <div class="swimmer-info">
+            Your Swimrankings ID: {{ user.swimrankings_id }}
+        </div>
         {% endif %}
     </div>
 
-    <div class="dashboard-grid">
-        <fieldset class="profile-section" id="pbs-section">
-            <legend><i class="section-icon">🏆</i> Personal Bests</legend>
-            {% if pbs %}
-            <div class="table-wrapper">
-                <table class="personal-bests">
-                    <thead>
-                        <tr>
-                            <th>Event</th>
-                            <th>Course</th>
-                            <th>Time</th>
-                            <th>Date</th>
-                            <th>Location</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for pb in pbs %}
-                        <tr>
-                            <td>{{ pb.event }}</td>
-                            <td>{{ pb.course }}</td>
-                            <td>{{ pb.time }}</td>
-                            <td>{{ pb.date }}</td>
-                            <td>{{ pb.city }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            {% else %}
-            <div class="empty-state">
-                <div class="empty-icon">📊</div>
-                No personal best times available
-            </div>
-            {% endif %}
-        </fieldset>
+    <fieldset class="profile-section" id="pbs-section">
+        <legend><i class="section-icon">🏆</i> Personal Bests</legend>
+        {% if pbs %}
+        <div class="table-wrapper">
+            <table class="personal-bests">
+                <thead>
+                    <tr>
+                        <th>Event</th>
+                        <th>Course</th>
+                        <th>Time</th>
+                        <th>Date</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pb in pbs %}
+                    <tr>
+                        <td>{{ pb.event }}</td>
+                        <td>{{ pb.course }}</td>
+                        <td>{{ pb.time }}</td>
+                        <td>{{ pb.date }}</td>
+                        <td>{{ pb.city }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <div class="empty-icon">📊</div>
+            No personal best times available
+        </div>
+        {% endif %}
+    </fieldset>
 
-        <fieldset class="profile-section" id="training-section">
-            <legend><i class="section-icon">📈</i> Recent Training</legend>
-            {% if sessions %}
-            <div class="recent-sessions">
-                {% for session in sessions[:3] %}
-                <div class="session-card">
-                    <div class="session-date">
-                        {{ session.date.strftime('%d-%m-%Y') }}
-                    </div>
-                    <div class="session-time">
-                        {{ session.time.strftime('%H:%M') }}
-                    </div>
+    <fieldset class="profile-section" id="training-section">
+        <legend><i class="section-icon">📈</i> Recent Training</legend>
+        {% if sessions %}
+        <div class="recent-sessions">
+            {% for session in sessions[:3] %}
+            <div class="session-card">
+                <div class="session-date">
+                    {{ session.date.strftime('%d-%m-%Y') }}
                 </div>
-                {% endfor %} {% if sessions|length > 3 %}
-                <div class="more-link">
-                    <a href="{{ url_for('training_sessions.view') }}"
-                        >View all {{ sessions|length }} sessions</a
-                    >
+                <div class="session-time">
+                    {{ session.time.strftime('%H:%M') }}
                 </div>
-                {% endif %}
             </div>
-            {% else %}
-            <div class="empty-state">
-                <div class="empty-icon">🏊‍♂️</div>
-                No training sessions recorded yet
+            {% endfor %} {% if sessions|length > 3 %}
+            <div class="more-link">
+                <a href="{{ url_for('training_sessions.view') }}"
+                    >View all {{ sessions|length }} sessions</a
+                >
             </div>
             {% endif %}
-        </fieldset>
-    </div>
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <div class="empty-icon">🏊‍♂️</div>
+            No training sessions recorded yet
+        </div>
+        {% endif %}
+    </fieldset>
 
     <fieldset class="profile-section action-section" id="actions-section">
         <legend><i class="section-icon">⚙️</i> Actions</legend>
@@ -101,6 +101,4 @@
         </div>
     </fieldset>
 </div>
-{% endblock %} {% block scripts %} {{ super() }}
-<script src="{{ url_for('static', filename='js/utils/draggable.js') }}"></script>
-{% endblock %}
+{% endblock %} {% block scripts %} {{ super() }} {% endblock %}
