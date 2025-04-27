@@ -2,6 +2,12 @@
     width: 100%;
     max-width: 900px;
     animation: fadeIn 0.5s ease-out forwards;
+    padding: 0 15px;
+}
+
+.profile-section {
+    cursor: move;
+    user-select: none;
 }
 
 .profile-header {
@@ -178,7 +184,7 @@
 
 @media (min-width: 768px) {
     .dashboard-grid {
-        grid-template-columns: 3fr 2fr;
+        grid-template-columns: 1fr 1fr;
     }
 }
 

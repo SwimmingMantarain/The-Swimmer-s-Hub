@@ -1,9 +1,9 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %} {% block extra_css %}
 <link
     rel="stylesheet"
     href="{{ url_for('static', filename='css/view_sessions.css') }}"
 />
-
+{% endblock %} {% block content %}
 <div id="myModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
@@ -18,45 +18,39 @@
 </div>
 
 <h2>Click the session date to view the session</h2>
-<br class="main-width" />
 
 <div class="sessions">
     <fieldset class="session-field">
         <legend>This Week's</legend>
-        <div id="current-week"></div>
+        <div id="current-week" class="session-group"></div>
     </fieldset>
-    <br />
 
     <fieldset class="session-field">
         <legend>This Month's</legend>
-        <div id="current-month"></div>
+        <div id="current-month" class="session-group"></div>
     </fieldset>
-    <br />
 
     <fieldset class="session-field">
         <legend>Last Month's</legend>
-        <div id="last-month"></div>
+        <div id="last-month" class="session-group"></div>
     </fieldset>
-    <br />
 
     <fieldset class="session-field">
         <legend>This Year's</legend>
-        <div id="current-year"></div>
+        <div id="current-year" class="session-group"></div>
     </fieldset>
-    <br />
 
     <fieldset class="session-field">
         <legend>Last Year's</legend>
-        <div id="last-year"></div>
+        <div id="last-year" class="session-group"></div>
     </fieldset>
-    <br />
 
     <fieldset class="session-field">
         <legend>All Training Sessions</legend>
-        <div id="all-sessions"></div>
+        <div id="all-sessions" class="session-group"></div>
     </fieldset>
 </div>
-
-<script src="{{ url_for('static', filename='js/session_modal.js') }}"></script>
-<script src="{{ url_for('static', filename='js/order_sessions.js') }}"></script>
+{% endblock %} {% block scripts %} {{ super() }}
+<script src="{{ url_for('static', filename='js/training/session_modal.js') }}"></script>
+<script src="{{ url_for('static', filename='js/training/order_sessions.js') }}"></script>
 {% endblock %}

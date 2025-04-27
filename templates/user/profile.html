@@ -1,9 +1,9 @@
-<!-- templates/profile.html (improved layout) -->
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} {% block extra_css %}
 <link
     rel="stylesheet"
     href="{{ url_for('static', filename='css/profile.css') }}"
 />
+{% endblock %} {% block content %}
 <div class="profile-container">
     <div class="profile-header">
         <div class="profile-avatar">
@@ -16,31 +16,33 @@
     </div>
 
     <div class="dashboard-grid">
-        <fieldset class="profile-section">
+        <fieldset class="profile-section" id="pbs-section">
             <legend><i class="section-icon">🏆</i> Personal Bests</legend>
             {% if pbs %}
-            <table class="personal-bests">
-                <thead>
-                    <tr>
-                        <th>Event</th>
-                        <th>Course</th>
-                        <th>Time</th>
-                        <th>Date</th>
-                        <th>Location</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for pb in pbs %}
-                    <tr>
-                        <td>{{ pb.event }}</td>
-                        <td>{{ pb.course }}</td>
-                        <td>{{ pb.time }}</td>
-                        <td>{{ pb.date }}</td>
-                        <td>{{ pb.city }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            <div class="table-wrapper">
+                <table class="personal-bests">
+                    <thead>
+                        <tr>
+                            <th>Event</th>
+                            <th>Course</th>
+                            <th>Time</th>
+                            <th>Date</th>
+                            <th>Location</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pb in pbs %}
+                        <tr>
+                            <td>{{ pb.event }}</td>
+                            <td>{{ pb.course }}</td>
+                            <td>{{ pb.time }}</td>
+                            <td>{{ pb.date }}</td>
+                            <td>{{ pb.city }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
             {% else %}
             <div class="empty-state">
                 <div class="empty-icon">📊</div>
@@ -49,7 +51,7 @@
             {% endif %}
         </fieldset>
 
-        <fieldset class="profile-section">
+        <fieldset class="profile-section" id="training-section">
             <legend><i class="section-icon">📈</i> Recent Training</legend>
             {% if sessions %}
             <div class="recent-sessions">
@@ -79,7 +81,7 @@
         </fieldset>
     </div>
 
-    <fieldset class="profile-section action-section">
+    <fieldset class="profile-section action-section" id="actions-section">
         <legend><i class="section-icon">⚙️</i> Actions</legend>
         <div class="action-buttons">
             <a
@@ -99,4 +101,6 @@
         </div>
     </fieldset>
 </div>
+{% endblock %} {% block scripts %} {{ super() }}
+<script src="{{ url_for('static', filename='js/utils/draggable.js') }}"></script>
 {% endblock %}

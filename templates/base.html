@@ -8,6 +8,7 @@
             rel="stylesheet"
             href="{{ url_for('static', filename='css/index.css') }}"
         />
+        {% block extra_css %}{% endblock %}
     </head>
 
     <body>
@@ -33,16 +34,21 @@
                 {% endif %}
             </nav>
         </header>
-        {% with messages = get_flashed_messages() %} {% if messages %}
-        <ul class="flashes">
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %} {% endwith %}
-        <main>{% block content %}{% endblock %}</main>
+        <div class="container">
+            {% with messages = get_flashed_messages() %} {% if messages %}
+            <ul class="flashes">
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %} {% endwith %}
+            <main>{% block content %}{% endblock %}</main>
+        </div>
+
+        {% block scripts %}
+        <script src="{{ url_for('static', filename='js/animation/bubbles.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/utils/fieldset.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/animation/animation.js') }}"></script>
+        {% endblock %}
     </body>
-    <script src="{{ url_for('static', filename='js/bubbles.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/fieldset.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/animation.js') }}"></script>
 </html>
