@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template
 from flask_login import login_required, current_user
-from models import TrainingSession
 from services import get_swimmer_pbs
 
 user_profile = Blueprint('user_profile', __name__)
@@ -13,5 +12,4 @@ def profile(user_name):
         pbs = get_swimmer_pbs(current_user.swimrankings_id)
     except Exception as e:
         print(f"Error fetching PBs: {e}")
-    sessions = TrainingSession.query.filter_by(user_id=current_user.id).all()
-    return render_template('user/profile.html', pbs=pbs, sessions=sessions, user=current_user)
+    return render_template('user/profile.html', pbs=pbs, user=current_user)

@@ -25,7 +25,6 @@ def load_user(user_id):
 
 # Register Blueprints for routes
 app.register_blueprint(auth)
-app.register_blueprint(training_sessions)
 app.register_blueprint(user_profile)
 app.register_blueprint(defaults)
 

@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, jsonify, flash, send_file
-from models import TrainingSession, User, db
+from models import User, db
 from werkzeug.utils import secure_filename
 from flask_login import login_required, current_user
 import os, datetime

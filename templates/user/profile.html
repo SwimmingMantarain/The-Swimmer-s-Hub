@@ -50,31 +50,10 @@
 
     <fieldset class="profile-section" id="training-section">
         <legend><i class="section-icon">📈</i> Recent Training</legend>
-        {% if sessions %}
-        <div class="recent-sessions">
-            {% for session in sessions[:3] %}
-            <div class="session-card">
-                <div class="session-date">
-                    {{ session.date.strftime('%d-%m-%Y') }}
-                </div>
-                <div class="session-time">
-                    {{ session.time.strftime('%H:%M') }}
-                </div>
-            </div>
-            {% endfor %} {% if sessions|length > 3 %}
-            <div class="more-link">
-                <a href="{{ url_for('training_sessions.view') }}"
-                    >View all {{ sessions|length }} sessions</a
-                >
-            </div>
-            {% endif %}
-        </div>
-        {% else %}
         <div class="empty-state">
             <div class="empty-icon">🏊‍♂️</div>
             No training sessions recorded yet
         </div>
-        {% endif %}
     </fieldset>
 
     <fieldset class="profile-section action-section" id="actions-section">
