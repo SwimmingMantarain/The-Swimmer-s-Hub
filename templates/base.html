@@ -10,25 +10,6 @@
     <body>
         <header>
             <h1>Aqua Metrics</h1>
-            <nav class="main-nav">
-                {% if current_user.is_authenticated %}
-                <a
-                    href="{{ url_for('user_profile.profile', user_name=current_user.username) }}"
-                    class="nav-link"
-                    ><i class="nav-icon">👤</i> Profile</a
-                >
-                <a href="{{ url_for('auth.logout') }}" class="nav-link"
-                    ><i class="nav-icon">🚪</i> Logout</a
-                >
-                {% else %}
-                <a href="{{ url_for('auth.login') }}" class="nav-link"
-                    ><i class="nav-icon">🔑</i> Login</a
-                >
-                <a href="{{ url_for('auth.register') }}" class="nav-link"
-                    ><i class="nav-icon">✏️</i> Register</a
-                >
-                {% endif %}
-            </nav>
         </header>
         <div class="container">
             {% with messages = get_flashed_messages() %} {% if messages %}
@@ -41,10 +22,6 @@
             <main>{% block content %}{% endblock %}</main>
         </div>
 
-        {% block scripts %}
-        <script src="{{ url_for('static', filename='js/animation/bubbles.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/utils/fieldset.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/animation/animation.js') }}"></script>
-        {% endblock %}
+        {% block scripts %} {% endblock %}
     </body>
 </html>
