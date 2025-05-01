@@ -1,12 +1,11 @@
 from flask import Flask
 from flask_login import LoginManager
 from models import db, User
-from routes import auth, training_sessions, user_profile, defaults, UPLOAD_FOLDER
+from routes import auth, user_profile, defaults
 import config
 
 app = Flask(__name__)
 app.config.from_object(config.Config)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Initialize SQLAlchemy
 db.init_app(app)

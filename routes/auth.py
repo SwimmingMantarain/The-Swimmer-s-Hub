@@ -9,9 +9,9 @@ auth = Blueprint('auth', __name__)
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        email = request.form['email']
+        username = request.form['username']
         password = request.form['password']
-        user = User.query.filter_by(email=email).first()
+        user = User.query.filter_by(username=username).first()
         if user and user.check_password(password):
             login_user(user)
             return redirect(url_for('user_profile.profile', user_name=user.username))
@@ -25,18 +25,13 @@ def register():
         email = request.form['email']
         password = request.form['password']
 
-        first_name = request.form['first_name']
-        last_name = request.form['last_name']
-
-        swimrankings_id = get_swimmer_id(first_name, last_name)
-
         # Check if email or username already exists
         if User.query.filter_by(email=email).first() or User.query.filter_by(username=username).first():
             flash('Username or email already exists')
             return redirect(url_for('auth.register'))
 
         # Create new user
-        new_user = User(username=username, email=email, swimrankings_id=swimrankings_id)
+        new_user = User(username=username, email=email)
         new_user.set_password(password)
         db.session.add(new_user)
         db.session.commit()

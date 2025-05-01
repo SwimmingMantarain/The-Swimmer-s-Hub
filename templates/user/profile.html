@@ -2,19 +2,16 @@
 %}
 <div class="profile-container">
     <div class="profile-header">
-        <div class="profile-avatar">
-            <div class="avatar-circle">{{ user.username[0] | upper }}</div>
-        </div>
         <h2>Your Profile</h2>
         {% if user.swimrankings_id %}
-        <div class="swimmer-info">
+        <div class="swimrankings-id">
             Your Swimrankings ID: {{ user.swimrankings_id }}
         </div>
         {% endif %}
     </div>
 
     <fieldset class="profile-section" id="pbs-section">
-        <legend><i class="section-icon">🏆</i> Personal Bests</legend>
+        <legend>Personal Bests</legend>
         {% if pbs %}
         <div class="table-wrapper">
             <table class="personal-bests">
@@ -41,38 +38,15 @@
             </table>
         </div>
         {% else %}
-        <div class="empty-state">
-            <div class="empty-icon">📊</div>
-            No personal best times available
-        </div>
+        <div class="empty-state">No personal best times available</div>
         {% endif %}
     </fieldset>
 
     <fieldset class="profile-section" id="training-section">
-        <legend><i class="section-icon">📈</i> Recent Training</legend>
+        <legend>Recent Training</legend>
         <div class="empty-state">
             <div class="empty-icon">🏊‍♂️</div>
             No training sessions recorded yet
-        </div>
-    </fieldset>
-
-    <fieldset class="profile-section action-section" id="actions-section">
-        <legend><i class="section-icon">⚙️</i> Actions</legend>
-        <div class="action-buttons">
-            <a
-                href="{{ url_for('training_sessions.upload') }}"
-                class="action-btn upload-btn"
-            >
-                <span class="btn-icon">📤</span>
-                Upload Session
-            </a>
-            <a
-                href="{{ url_for('training_sessions.view') }}"
-                class="action-btn view-btn"
-            >
-                <span class="btn-icon">👁️</span>
-                View Sessions
-            </a>
         </div>
     </fieldset>
 </div>
