@@ -1,17 +1,18 @@
-{% extends 'base.html' %} {% block extra_css %} {% endblock %} {% block content
-%}
+{% extends 'base.html' %} {% block extra_css %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/profile.css') }}"
+/>
+{% endblock %} {% block content %}
 <div class="profile-container">
-    <div class="profile-header">
-        <h2>Your Profile</h2>
-        {% if user.swimrankings_id %}
-        <div class="swimrankings-id">
-            Your Swimrankings ID: {{ user.swimrankings_id }}
-        </div>
-        {% endif %}
-    </div>
-
     <fieldset class="profile-section" id="pbs-section">
-        <legend>Personal Bests</legend>
+        <legend>
+            Personal Bests {% if user.swimrankings_id %}
+            <a id="swimrankings-id" href="https://www.swimrankings.net/index.php?page=athleteDetail&athleteId={{ user.swimrankings_id }}" target="_blank" rel="noopener noreferrer">
+                Swimrankings ID: {{ user.swimrankings_id }}
+            <a/>
+            {% endif %}
+        </legend>
         {% if user.added_swimrankings %} {% if pbs %}
         <div class="table-wrapper">
             <table class="personal-bests">
