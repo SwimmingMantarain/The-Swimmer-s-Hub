@@ -25,7 +25,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for pb in pbs if loop.index >= 4 %}
+                    {% set sorted_pbs = pbs|sort(attribute='date', reverse=True)
+                    %} {% for pb in sorted_pbs %} {% if loop.index <= 5 %}
                     <tr>
                         <td>{{ pb.event }}</td>
                         <td>{{ pb.course }}</td>
@@ -33,7 +34,7 @@
                         <td>{{ pb.date }}</td>
                         <td>{{ pb.city }}</td>
                     </tr>
-                    {% endfor %}
+                    {% endif %} {% endfor %}
                 </tbody>
             </table>
         </div>
@@ -44,6 +45,7 @@
             <form
                 method="POST"
                 action="{{ url_for('db_api.find_swimrankings_id') }}"
+                enctype="application/x-www-form-urlencoded"
             >
                 <div>
                     <label for="firstname">Firstname:</label>
