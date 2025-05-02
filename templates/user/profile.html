@@ -12,7 +12,7 @@
 
     <fieldset class="profile-section" id="pbs-section">
         <legend>Personal Bests</legend>
-        {% if pbs %}
+        {% if user.added_swimrankings %} {% if pbs %}
         <div class="table-wrapper">
             <table class="personal-bests">
                 <thead>
@@ -39,6 +39,28 @@
         </div>
         {% else %}
         <div class="empty-state">No personal best times available</div>
+        {% endif %} {% else %}
+        <div class="empty-state">
+            <form
+                method="POST"
+                action="{{ url_for('db_api.find_swimrankings_id') }}"
+            >
+                <div>
+                    <label for="firstname">Firstname:</label>
+                    <input
+                        type="text"
+                        id="firstname"
+                        name="firstname"
+                        required
+                    />
+                </div>
+                <div>
+                    <label for="lastname">Lastname:</label>
+                    <input type="text" id="lastname" name="lastname" required />
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
         {% endif %}
     </fieldset>
 

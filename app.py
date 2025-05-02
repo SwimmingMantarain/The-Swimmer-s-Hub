@@ -1,8 +1,10 @@
 from flask import Flask
 from flask_login import LoginManager
+from flask_migrate import Migrate
 from models import db, User
-from routes import auth, user_profile, defaults
+from routes import auth, user_profile, defaults, db_api
 import config
+import os
 
 app = Flask(__name__)
 app.config.from_object(config.Config)
@@ -12,6 +14,8 @@ db.init_app(app)
 
 with app.app_context():
     db.create_all()
+
+migrate = Migrate(app, db)
 
 # Initialize Flask-Login
 login_manager = LoginManager()
@@ -26,6 +30,7 @@ def load_user(user_id):
 app.register_blueprint(auth)
 app.register_blueprint(user_profile)
 app.register_blueprint(defaults)
+app.register_blueprint(db_api)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
