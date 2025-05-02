@@ -14,7 +14,6 @@
             {% endif %}
         </legend>
         {% if user.added_swimrankings %} {% if pbs %}
-        <div class="table-wrapper">
             <table class="personal-bests">
                 <thead>
                     <tr>
@@ -22,7 +21,7 @@
                         <th>Course</th>
                         <th>Time</th>
                         <th>Date</th>
-                        <th>Location</th>
+                        <th id="location">Location</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,12 +32,11 @@
                         <td>{{ pb.course }}</td>
                         <td>{{ pb.time }}</td>
                         <td>{{ pb.date }}</td>
-                        <td>{{ pb.city }}</td>
+                        <td id="location">{{ pb.city }}</td>
                     </tr>
                     {% endif %} {% endfor %}
                 </tbody>
             </table>
-        </div>
         {% else %}
         <div class="empty-state">No personal best times available</div>
         {% endif %} {% else %}
@@ -71,7 +69,15 @@
         <legend>Recent Training</legend>
         <div class="empty-state">
             <div class="empty-icon">🏊‍♂️</div>
-            No training sessions recorded yet
+            No training sessions recorded yet!
+        </div>
+    </fieldset>
+
+    <fieldset class="profile-section" id="meat-section">
+        <legend>Up & Coming Meets</legend>
+        <div class="empty-state">
+            <div class="empty-icon">📅</div>
+            No upcoming meets yet!
         </div>
     </fieldset>
 </div>
