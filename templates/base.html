@@ -32,6 +32,10 @@
         />
         <link
             rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        />
+        <link
+            rel="stylesheet"
             href="{{ url_for('static', filename='css/main.css') }}"
         />
         <title>Aqua Metrics</title>
@@ -39,21 +43,10 @@
     </head>
 
     <body>
-        <div class="nav-bar">
-            <div class="icon">
-                <img
-                    src="{{ url_for('static', filename='img/android-chrome-512x512.png') }}"
-                    alt="Aqua Metrics Logo"
-                    class="logo"
-                />
-            </div>
-            <div class="nav-item">
-                <p>pipi</p>
-            </div>
-        </div>
         <header>
             <h1>Aqua Metrics</h1>
         </header>
+
         <div class="container">
             {% with messages = get_flashed_messages() %} {% if messages %}
             <ul class="flashes">
@@ -64,7 +57,6 @@
             {% endif %} {% endwith %}
             <main>{% block content %}{% endblock %}</main>
         </div>
-
         {% block scripts %} {% endblock %}
     </body>
 </html>

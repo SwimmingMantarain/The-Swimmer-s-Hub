@@ -19,6 +19,8 @@ def get_swimmer_id(first_name, last_name):
     return athlete_id
 
 def get_swimmer_pbs(id):
+    if not id:
+        return None
     url = f"https://www.swimrankings.net/index.php?page=athleteDetail&athleteId={id}"
     response = requests.get(url)
     try:

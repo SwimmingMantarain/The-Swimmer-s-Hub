@@ -25,7 +25,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for pb in pbs %}
+                    {% for pb in pbs if loop.index >= 4 %}
                     <tr>
                         <td>{{ pb.event }}</td>
                         <td>{{ pb.course }}</td>
