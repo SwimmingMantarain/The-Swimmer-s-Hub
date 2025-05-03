@@ -4,6 +4,6 @@ db = SQLAlchemy()
 
 # Import models to make them available through models __package__
 from models.user import User
-from models.personal_bests import PersonalBests
+from models.user_meets import UserMeet
 
-__all__ = ['db', 'User', 'PersonalBests']
+__all__ = ['db', 'User', 'UserMeet']

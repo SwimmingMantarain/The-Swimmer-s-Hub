@@ -26,7 +26,7 @@
                 </thead>
                 <tbody>
                     {% set sorted_pbs = pbs|sort(attribute='date', reverse=True)
-                    %} {% for pb in sorted_pbs %} {% if loop.index <= 5 %}
+                    %} {% for pb in sorted_pbs %}
                     <tr>
                         <td>{{ pb.event }}</td>
                         <td>{{ pb.course }}</td>
@@ -34,7 +34,7 @@
                         <td>{{ pb.date }}</td>
                         <td id="location">{{ pb.city }}</td>
                     </tr>
-                    {% endif %} {% endfor %}
+                    {% endfor %}
                 </tbody>
             </table>
         {% else %}
@@ -66,19 +66,48 @@
     </fieldset>
 
     <fieldset class="profile-section" id="training-section">
-        <legend>Recent Training</legend>
+        <legend>Recent Training 🏊‍♂️</legend>
         <div class="empty-state">
-            <div class="empty-icon">🏊‍♂️</div>
             No training sessions recorded yet!
         </div>
     </fieldset>
 
     <fieldset class="profile-section" id="meat-section">
-        <legend>Up & Coming Meets</legend>
+        <legend>Up & Coming Meets 📅</legend>
+        {% if user_meets %}
+        <button onclick="location.href = '{{ url_for('user_meets.add_meat') }}';">Add some Meets!</button>
+        <table>
+            <tbody>
+                <tr>
+                    <th class="Date">Date</th>
+                    <th class="Course">Course</th>
+                    <th class="City">City</th>
+                    <th class="Name">Meet Name</th>
+                </tr>
+                {% for meat in user_meets %}
+                <tr>
+                    <td class="Date">
+                        {{ meat.meet_date }}
+                    </td>
+                    <td class="Course">
+                        {{ meat.meet_course }}m
+                    </td>
+                    <td class="City">
+                        {{ meat.meet_city }}
+                    </td>
+                    <td class="Name">
+                        {{ meat.meet_name}}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
         <div class="empty-state">
-            <div class="empty-icon">📅</div>
             No upcoming meets yet!
+            <button onclick="location.href = '{{ url_for('user_meets.add_meat') }}';">Add some Meets!</button>
         </div>
+        {% endif %}
     </fieldset>
 </div>
 {% endblock %}

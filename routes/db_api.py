@@ -8,11 +8,6 @@ db_api = Blueprint('db_api', __name__)
 @db_api.route("/db/post/find_swimrankings_id", methods=["POST"])
 @login_required
 def find_swimrankings_id():
-    # Debug: Print all form data and request information
-    print("Form data:", request.form)
-    print("Content type:", request.content_type)
-    print("Data:", request.data)
-
     try:
         first_name = request.form.get('firstname')
         last_name = request.form.get('lastname')

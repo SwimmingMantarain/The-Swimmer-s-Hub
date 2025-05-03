@@ -1,8 +1,8 @@
 from flask import Flask
 from flask_login import LoginManager
 from flask_migrate import Migrate
-from models import db, User
-from routes import auth, user_profile, defaults, db_api
+from models import db, User, UserMeet
+from routes import auth, user_profile, defaults, db_api, user_meets
 import config
 import os
 
@@ -31,6 +31,7 @@ app.register_blueprint(auth)
 app.register_blueprint(user_profile)
 app.register_blueprint(defaults)
 app.register_blueprint(db_api)
+app.register_blueprint(user_meets)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
