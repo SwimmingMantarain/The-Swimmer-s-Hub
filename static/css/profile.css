@@ -10,13 +10,12 @@
 
 .profile-container {
     display: flex;
-    grid-gap: 1rem;
+    grid-gap: 1.5rem;
     justify-content: center;
     align-items: flex-start;
 }
 
 .profile-section .empty-state {
-    width: max-content;
     display: grid;
     grid-template-columns: auto auto;
     grid-template-rows: auto auto;
@@ -40,17 +39,52 @@ tr {
     text-align: left;
 }
 
-/* Mobile... cool */
-
+/* Mobile... Cool */
 @media only screen and (max-width: 768px) {
     .profile-container {
         flex-direction: column;
-        align-items: center;
+        align-items: stretch;
+        width: 100%;
+        padding: 0 1rem;
+        gap: 0;
+    }
+
+    .profile-section,
+    #pbs-section,
+    #training-section,
+    #meat-section {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: auto !important;
+        box-sizing: border-box;
+        margin: 0 0 1.5rem 0;
     }
 
     fieldset {
-        width: 100%;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: auto !important;
         padding: 0.5rem;
+        box-sizing: border-box;
+    }
+
+    .empty-state {
+        width: 100% !important;
+        max-width: 100% !important;
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .empty-icon {
+        margin-bottom: 0.5rem;
+    }
+
+    table {
+        width: 100%;
+        max-width: 100%;
     }
 
     #location {
