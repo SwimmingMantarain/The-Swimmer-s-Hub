@@ -1,11 +1,15 @@
-{% extends 'base.html' %} {% block extra_css %}
-<link
-    rel="stylesheet"
-    href="{{ url_for('static', filename='css/add_meets.css') }}"
-/>
-{% endblock %} {% block content %} {% if entries %}
+{% extends 'base.html' %} {% block extra_css %} {% endblock %} {% block content
+%} {% if entries %}
 <fieldset class="box">
-    <legend>Up & Coming Meets <a id="smol-info">(According to <a id="smol-info-linked" href="https://live.swimrankings.net">live.swimrankings.net</a>)</legend>
+    <legend>
+        Up & Coming Meets
+        <span id="smol-info"
+            >(According to
+            <a id="smol-info-linked" href="https://live.swimrankings.net"
+                >live.swimrankings.net</a
+            >)</span
+        >
+    </legend>
     <form method="POST">
         <button type="submit">Submit</button>
         <table>
@@ -20,19 +24,43 @@
                 {% for entry in entries %}
                 <tr>
                     <td class="Checkbox">
-                        <input type="checkbox" name="entry" value="{{ [entry[0],entry[1]] }}"
+                        <input
+                            type="checkbox"
+                            name="entry"
+                            value="{{ [entry[0],entry[1]] }}"
+                        />
                     </td>
                     <td class="Date">
-                        <a href="https://live.swimrankings.net/{{ entry[0] }}/" target="_blank" rel="noopener noreferrer">{{ entry[1] }}</a>
+                        <a
+                            href="https://live.swimrankings.net/{{ entry[0] }}/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >{{ entry[1] }}</a
+                        >
                     </td>
                     <td class="Course">
-                        <a href="https://live.swimrankings.net/{{ entry[0] }}/" target="_blank" rel="noopener noreferrer">{{ entry[2] }}</a>
+                        <a
+                            href="https://live.swimrankings.net/{{ entry[0] }}/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >{{ entry[2] }}</a
+                        >
                     </td>
                     <td class="City">
-                        <a href="https://live.swimrankings.net/{{ entry[0] }}/" target="_blank" rel="noopener noreferrer">{{ entry[3] }}</a>
+                        <a
+                            href="https://live.swimrankings.net/{{ entry[0] }}/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >{{ entry[3] }}</a
+                        >
                     </td>
                     <td class="Name">
-                        <a href="https://live.swimrankings.net/{{ entry[0] }}/" target="_blank" rel="noopener noreferrer">{{ entry[4] }}</a>
+                        <a
+                            href="https://live.swimrankings.net/{{ entry[0] }}/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >{{ entry[4] }}</a
+                        >
                     </td>
                 </tr>
                 {% endfor %}

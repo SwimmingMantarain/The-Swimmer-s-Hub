@@ -38,6 +38,11 @@
             rel="stylesheet"
             href="{{ url_for('static', filename='css/main.css') }}"
         />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Noto+Serif:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+
         <title>Aqua Metrics</title>
         {% block extra_css %}{% endblock %}
     </head>
@@ -45,6 +50,31 @@
     <body>
         <header>
             <h1>Aqua Metrics</h1>
+            <div class="nav-bar">
+                {% if user %}
+                <div class="nav-item">
+                    <a
+                        href="{{ url_for('user_profile.profile', user_name=current_user.username) }}"
+                        >Profile</a
+                    >
+                </div>
+                <div class="nav-item">
+                    <a href="{{ url_for('auth.logout') }}">Logout</a>
+                </div>
+                <div class="nav-item">
+                    <a href="{{ url_for('db_api.delete_account') }}"
+                        >Delete Account</a
+                    >
+                </div>
+                {% else %}
+                <div class="nav-item">
+                    <a href="{{ url_for('auth.register') }}">Register</a>
+                </div>
+                <div class="nav-item">
+                    <a href="{{ url_for('auth.login') }}">Login</a>
+                </div>
+                {% endif %}
+            </div>
         </header>
 
         <div class="container">

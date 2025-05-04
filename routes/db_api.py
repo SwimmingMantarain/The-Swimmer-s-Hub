@@ -32,3 +32,16 @@ def find_swimrankings_id():
     except Exception as e:
         flash(f"An error occurred: {str(e)}")
         return redirect(url_for('user_profile.profile', user_name=current_user.username))
+
+@db_api.route("/db/post/delete_account", methods=["POST", "GET"])
+@login_required
+def delete_account():
+    try:
+        db.session.delete(current_user)
+        db.session.commit()
+        flash("Your account has been deleted.")
+        return redirect(url_for('auth.login'))
+
+    except Exception as e:
+        flash(f"An error occurred: {str(e)}")
+        return redirect(url_for('user_profile.profile', user_name=current_user.username))

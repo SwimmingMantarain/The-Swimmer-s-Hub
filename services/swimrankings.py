@@ -5,7 +5,6 @@ def get_swimmer_id(first_name, last_name):
     url = f"https://www.swimrankings.net/index.php?&internalRequest=athleteFind&athlete_clubId=-1&athlete_gender=-1&athlete_lastname={last_name}&athlete_firstname={first_name}"
     response = requests.get(url)
 
-
     try:
         soup = BeautifulSoup(response.content, 'html5lib')
         name = soup.find('td', class_='name')
@@ -56,8 +55,9 @@ def get_swimmer_pbs(id):
 def scrape_live_swimrankings():
     url = "https://live.swimrankings.net/"
     response = requests.get(url)
+    response.encoding = 'utf-8'
 
-    soup = BeautifulSoup(response.content, 'html5lib')
+    soup = BeautifulSoup(response.content, 'html5lib', from_encoding='utf-8')
     table = soup.find('table')
     rows = table.find_all('tr')
     rows.pop(0)
@@ -86,9 +86,7 @@ def scrape_live_swimrankings():
     return entries
 
 def get_meat(data):
-    print(data)
     url = f"https://live.swimrankings.net/{str(data[0])}"
-    print(url)
     response = requests.get(url)
 
     soup = BeautifulSoup(response.content, 'html5lib')

@@ -7,7 +7,7 @@
 <div class="profile-container">
     <fieldset class="profile-section" id="pbs-section">
         <legend>
-            Personal Bests {% if user.swimrankings_id %}
+            Personal Bests 🏆{% if user.swimrankings_id %}
             <a id="swimrankings-id" href="https://www.swimrankings.net/index.php?page=athleteDetail&athleteId={{ user.swimrankings_id }}" target="_blank" rel="noopener noreferrer">
                 Swimrankings ID: {{ user.swimrankings_id }}
             <a/>
@@ -41,6 +41,7 @@
         <div class="empty-state">No personal best times available</div>
         {% endif %} {% else %}
         <div class="empty-state">
+            <p>Find your swimrankings ID</p>
             <form
                 method="POST"
                 action="{{ url_for('db_api.find_swimrankings_id') }}"
@@ -74,13 +75,12 @@
 
     <fieldset class="profile-section" id="meat-section">
         <legend>Up & Coming Meets 📅</legend>
-        {% if user_meets %}
+        {% if user_meets and user_meets|length >= 1 %}
         <button onclick="location.href = '{{ url_for('user_meets.add_meat') }}';">Add some Meets!</button>
         <table>
             <tbody>
                 <tr>
                     <th class="Date">Date</th>
-                    <th class="Course">Course</th>
                     <th class="City">City</th>
                     <th class="Name">Meet Name</th>
                 </tr>
@@ -88,9 +88,6 @@
                 <tr>
                     <td class="Date">
                         {{ meat.meet_date }}
-                    </td>
-                    <td class="Course">
-                        {{ meat.meet_course }}m
                     </td>
                     <td class="City">
                         {{ meat.meet_city }}

@@ -16,6 +16,7 @@ def add_meat():
             processed_individual = get_meat(ast.literal_eval(select_individual))
 
             if not UserMeet.query.filter_by(meet_name=processed_individual[0]).first():
+                print(processed_individual[0])
                 new_entry = UserMeet(
                     user_id = current_user.id,
                     meet_url = f"https://live.swimrankings.net/{select_individual}/",
