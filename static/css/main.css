@@ -5,17 +5,43 @@
     font-family: "Noto Sans", "Noto Serif", Arial, Helvetica, sans-serif;
 }
 
+:root {
+    --deep-blue: #041c32;
+    --medium-blue: #04293a;
+    --light-blue: #064663;
+    --accent-blue: #0a769d;
+    --text: #ecf2f9;
+    --text-secondary: #b4c8e1;
+    --input-bg: #07374b;
+    --success: #136f63;
+    --error: #d62828;
+}
+
+body {
+    background-color: var(--deep-blue);
+    color: var(--text);
+}
+
 header {
     padding: 1rem;
     text-align: center;
+    background-color: var(--medium-blue);
+    border-bottom: 3px solid var(--accent-blue);
 }
 
 fieldset {
     width: max-content;
+    background-color: var(--medium-blue);
+    border: 1px solid var(--accent-blue);
+    border-radius: 4px;
 }
 
 legend {
     font-size: 1.2rem;
+    color: var(--text);
+    background-color: var(--accent-blue);
+    padding: 0.3rem 0.8rem;
+    border-radius: 3px;
 }
 
 .nav-bar {
@@ -23,4 +49,116 @@ legend {
     justify-content: center;
     align-items: center;
     grid-gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.nav-item a {
+    color: var(--text);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.nav-item a:hover {
+    background-color: var(--light-blue);
+}
+
+/* Flash Messages */
+.flashes {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    max-width: 600px;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.flashes li {
+    background-color: var(--medium-blue);
+    color: var(--text);
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
+    border-left: 5px solid var(--accent-blue);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+    animation: fadeOut 2s forwards;
+    pointer-events: auto;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    70% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+/* Form elements */
+input,
+select,
+textarea {
+    background-color: var(--input-bg);
+    border: 1px solid var(--light-blue);
+    color: var(--text);
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+button,
+.auth-button {
+    background-color: var(--accent-blue);
+    color: var(--text);
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover,
+.auth-button:hover {
+    background-color: var(--light-blue);
+}
+
+a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: var(--text);
+    text-decoration: underline;
+}
+
+/* Tables */
+table {
+    background-color: var(--medium-blue);
+    border-collapse: collapse;
+}
+
+th {
+    background-color: var(--light-blue);
+    color: var(--text);
+    padding: 8px;
+}
+
+tr {
+    border-bottom: 1px solid var(--light-blue);
+}
+
+td {
+    padding: 8px;
+    color: var(--text);
 }
