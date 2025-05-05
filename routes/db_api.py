@@ -1,6 +1,6 @@
 from flask import Blueprint, request, redirect, url_for, flash
 from flask_login import login_required, current_user
-from models import db
+from models import db, UserMeet
 from services import get_swimmer_id
 
 db_api = Blueprint('db_api', __name__)
@@ -45,3 +45,26 @@ def delete_account():
     except Exception as e:
         flash(f"An error occurred: {str(e)}")
         return redirect(url_for('user_profile.profile', user_name=current_user.username))
+
+@db_api.route("/db/api/delete_meet", methods=["POST"])
+@login_required
+def delete_meet():
+    try:
+        meet_id = request.json.get('meet_id')
+
+        if not meet_id:
+            return {"success": False, "message": "Meet ID is required"}, 400
+
+        meet = UserMeet.query.filter_by(id=meet_id, user_id=current_user.id).first()
+
+        if not meet:
+            return {"success": False, "message": "Meet not found or not authorized"}, 404
+
+        db.session.delete(meet)
+        db.session.commit()
+
+        return {"success": True, "message": "Meet deleted successfully"}, 200
+
+    except Exception as e:
+        db.session.rollback()
+        return {"success": False, "message": f"An error occurred: {str(e)}"}, 500

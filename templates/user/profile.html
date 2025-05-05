@@ -74,40 +74,42 @@
     </fieldset>
 
     <fieldset class="profile-section" id="meat-section">
-        <legend>Up & Coming Meets 📅</legend>
-        {% if user_meets and user_meets|length >= 1 %}
-        <button onclick="location.href = '{{ url_for('user_meets.add_meat') }}';">Add some Meets!</button>
-        <button id="remove-toggle">Toggle Remove</button>
-        <input type="hidden" id="is-toggled" value="false" />
-        <table id="meat-table">
-            <tbody>
-                <tr>
-                    <th class="Date">Date</th>
-                    <th class="City">City</th>
-                    <th class="Name">Meet Name</th>
-                </tr>
-                {% for meat in user_meets %}
-                <tr>
-                    <td class="Date">
-                        {{ meat.meet_date }}
-                    </td>
-                    <td class="City">
-                        {{ meat.meet_city }}
-                    </td>
-                    <td class="Name">
-                        {{ meat.meet_name}}
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        {% else %}
-        <div class="empty-state">
-            No upcoming meets yet!
-            <button onclick="location.href = '{{ url_for('user_meets.add_meat') }}';">Add some Meets!</button>
-        </div>
-        {% endif %}
-    </fieldset>
+            <legend>Up & Coming Meets 📅</legend>
+            {% if user_meets and user_meets|length >= 1 %}
+            <div class="meets-action-buttons">
+                <button id="remove-toggle">Toggle Remove</button>
+                <button class="add-meets-btn" onclick="location.href = '{{ url_for('user_meets.add_meat') }}';">Add some Meets!</button>
+            </div>
+            <input type="hidden" id="is-toggled" value="false" />
+            <table id="meat-table">
+                <tbody>
+                    <tr>
+                        <th class="Date">Date</th>
+                        <th class="City">City</th>
+                        <th class="Name">Meet Name</th>
+                    </tr>
+                    {% for meat in user_meets %}
+                    <tr data-meet-id="{{ meat.id }}">
+                        <td class="Date">
+                            {{ meat.meet_date }}
+                        </td>
+                        <td class="City">
+                            {{ meat.meet_city }}
+                        </td>
+                        <td class="Name">
+                            {{ meat.meet_name}}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <div class="empty-state">
+                No upcoming meets yet!
+                <button class="add-meets-btn" onclick="location.href = '{{ url_for('user_meets.add_meat') }}';">Add some Meets!</button>
+            </div>
+            {% endif %}
+        </fieldset>
 </div>
 {% endblock %}
 {% block scripts %}
