@@ -11,7 +11,16 @@
         >
     </legend>
     <form method="POST">
-        <button type="submit">Submit</button>
+        <header>
+            <button type="submit">Submit</button>
+            <br />
+            <input
+                type="text"
+                placeholder="Search for a meet by Name!"
+                style="width: 100%"
+                onchange=""
+            />
+        </header>
         <table>
             <tbody>
                 <tr>
@@ -80,4 +89,6 @@
         >, reload page to try again
     </h1>
 </fieldset>
-{% endif %} {% endblock %}
+{% endif %} {% endblock %} {% block scripts %}
+<script src="{{ url_for('static', filename='js/search.js') }}"></script>
+{% endblock %}
