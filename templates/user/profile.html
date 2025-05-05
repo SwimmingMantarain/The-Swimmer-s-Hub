@@ -77,7 +77,9 @@
         <legend>Up & Coming Meets 📅</legend>
         {% if user_meets and user_meets|length >= 1 %}
         <button onclick="location.href = '{{ url_for('user_meets.add_meat') }}';">Add some Meets!</button>
-        <table>
+        <button id="remove-toggle">Toggle Remove</button>
+        <input type="hidden" id="is-toggled" value="false" />
+        <table id="meat-table">
             <tbody>
                 <tr>
                     <th class="Date">Date</th>
@@ -107,4 +109,7 @@
         {% endif %}
     </fieldset>
 </div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/toggle_remove.js') }}"></script>
 {% endblock %}
