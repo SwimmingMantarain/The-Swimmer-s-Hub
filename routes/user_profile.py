@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 from flask_login import login_required, current_user
 from models import UserMeet
 from services import get_swimmer_pbs
@@ -15,3 +15,12 @@ def profile(user_name):
         print(f"Error fetching PBs: {e}")
     user_meets = list(reversed(UserMeet.query.filter_by(user_id=current_user.id).all()))
     return render_template('user/profile.html', pbs=pbs, user=current_user, user_meets=user_meets)
+
+@user_profile.route('/settings/<user_name>', methods=['GET', 'POST'])
+@login_required
+def settings(user_name):
+    if request.method == 'POST':
+        # Handle form submission
+        pass
+
+    return render_template('user/settings.html', user=current_user)
