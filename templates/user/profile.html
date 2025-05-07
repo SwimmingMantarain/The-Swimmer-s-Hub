@@ -38,7 +38,7 @@
                 </tbody>
             </table>
         {% else %}
-        <div class="empty-state">No personal best times available</div>
+        <div class="empty-state">No personal best times could be found. Try reloading the page?</div>
         {% endif %} {% else %}
         <div class="empty-state">
             <p>Find your swimrankings ID</p>
@@ -113,5 +113,7 @@
 </div>
 {% endblock %}
 {% block scripts %}
+{% if user_meets and user_meets|length >= 1 %}
 <script src="{{ url_for('static', filename='js/toggle_remove.js') }}"></script>
+{% endif %}
 {% endblock %}

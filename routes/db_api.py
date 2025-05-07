@@ -1,6 +1,6 @@
 from flask import Blueprint, request, redirect, url_for, flash
 from flask_login import login_required, current_user
-from models import db, UserMeet
+from models import db, UserMeet, User
 from services import get_swimmer_id
 
 db_api = Blueprint('db_api', __name__)
@@ -23,15 +23,33 @@ def find_swimrankings_id():
             flash("Successfully found your Swimrankings ID!")
         else:
             flash("Could not find your Swimrankings ID. Please check your name.")
+            if request.path == f"/profile/{current_user.username}":
+                return redirect(url_for('user_profile.profile', user_name=current_user.username))
+
+            if request.path == f"/settings/{current_user.username}":
+                return redirect(url_for('user_profile.settings', user_name=current_user.username))
 
         current_user.added_swimrankings = True
         db.session.commit()
 
-        return redirect(url_for('user_profile.profile', user_name=current_user.username))
+        if request.path == f"/profile/{current_user.username}":
+            return redirect(url_for('user_profile.profile', user_name=current_user.username))
+
+        if request.path == f"/settings/{current_user.username}":
+            return redirect(url_for('user_profile.settings', user_name=current_user.username))
 
     except Exception as e:
         flash(f"An error occurred: {str(e)}")
         return redirect(url_for('user_profile.profile', user_name=current_user.username))
+
+@db_api.route("/db/post/remove_sr_id", methods=["POST"])
+@login_required
+def remove_sr_id():
+    current_user.swimrankings_id = None
+    current_user.added_swimrankings = False
+    db.session.commit()
+    flash("Successfully removed ID")
+    return {"sucess": True, "message": "beans" }, 200
 
 @db_api.route("/db/post/delete_account", methods=["POST", "GET"])
 @login_required

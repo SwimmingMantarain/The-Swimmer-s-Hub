@@ -1,0 +1,26 @@
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+fieldset {
+    display: flex;
+    width: 100%;
+    padding: 2rem;
+}
+
+legend {
+    margin-left: 1rem;
+}
+
+.field-item {
+    border: 2px solid var(--accent-blue);
+    border-radius: 5px;
+    width: 100%;
+    padding: 0.5rem;
+}
+
+.option-list {
+    margin: 0.5rem;
+}

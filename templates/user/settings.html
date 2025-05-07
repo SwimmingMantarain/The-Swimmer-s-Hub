@@ -1,0 +1,47 @@
+{% extends "base.html" %} {% block extra_css %}
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/settings.css') }}"
+/>
+{% endblock %} {% block content %}
+<fieldset>
+    <legend>Settings</legend>
+    <div class="field-item">
+        <h1>Swimrankings ID</h1>
+        {% if user.added_swimrankings %}
+        <p>
+            Your current ID:
+            <a
+                href="https://www.swimrankings.net/index.php?page=athleteDetail&athleteId={{ user.swimrankings_id }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                >{{ user.swimrankings_id }}</a
+            >
+        </p>
+        <div class="option-list">
+            <button class="button" id="clear_id">Remove ID</button>
+            <button class="button" id="change_id">Change ID</button>
+        </div>
+        {% else %}
+        <p>Find your swimrankings ID</p>
+        <form
+            method="POST"
+            action="{{ url_for('db_api.find_swimrankings_id') }}"
+            enctype="application/x-www-form-urlencoded"
+        >
+            <div>
+                <label for="firstname">Firstname:</label>
+                <input type="text" id="firstname" name="firstname" required />
+            </div>
+            <div>
+                <label for="lastname">Lastname:</label>
+                <input type="text" id="lastname" name="lastname" required />
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+        {% endif %}
+    </div>
+</fieldset>
+{% endblock %} {% block scripts %}
+<script src="{{ url_for('static', filename='js/settings.js') }}"></script>
+{% endblock %}
