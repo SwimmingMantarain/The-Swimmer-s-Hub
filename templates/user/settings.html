@@ -7,7 +7,7 @@
 <fieldset>
     <legend>Settings</legend>
     <div class="field-item">
-        <h1>Swimrankings ID</h1>
+        <h1>Swimrankings API</h1>
         {% if user.added_swimrankings %}
         <p>
             Your current ID:
@@ -19,8 +19,7 @@
             >
         </p>
         <div class="option-list">
-            <button class="button" id="clear_id">Remove ID</button>
-            <button class="button" id="change_id">Change ID</button>
+            <button type="button" id="clear_id">Remove ID</button>
         </div>
         {% else %}
         <p>Find your swimrankings ID</p>
@@ -40,6 +39,12 @@
             <button type="submit">Submit</button>
         </form>
         {% endif %}
+    </div>
+    <div class="field-item">
+        <h1>Your Account</h1>
+        <div class="option-list">
+            <button type="button" id="delete_account">Delete Account</button>
+        </div>
     </div>
 </fieldset>
 {% endblock %} {% block scripts %}

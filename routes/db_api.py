@@ -23,20 +23,12 @@ def find_swimrankings_id():
             flash("Successfully found your Swimrankings ID!")
         else:
             flash("Could not find your Swimrankings ID. Please check your name.")
-            if request.path == f"/profile/{current_user.username}":
-                return redirect(url_for('user_profile.profile', user_name=current_user.username))
-
-            if request.path == f"/settings/{current_user.username}":
-                return redirect(url_for('user_profile.settings', user_name=current_user.username))
+            return redirect(url_for('user_profile.profile', user_name=current_user.username))
 
         current_user.added_swimrankings = True
         db.session.commit()
 
-        if request.path == f"/profile/{current_user.username}":
-            return redirect(url_for('user_profile.profile', user_name=current_user.username))
-
-        if request.path == f"/settings/{current_user.username}":
-            return redirect(url_for('user_profile.settings', user_name=current_user.username))
+        return redirect(url_for('user_profile.profile', user_name=current_user.username))
 
     except Exception as e:
         flash(f"An error occurred: {str(e)}")

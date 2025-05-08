@@ -10,7 +10,7 @@
 
 .profile-container {
     display: flex;
-    grid-gap: 1.5rem;
+    grid-gap: 1rem;
     justify-content: center;
     align-items: flex-start;
 }
