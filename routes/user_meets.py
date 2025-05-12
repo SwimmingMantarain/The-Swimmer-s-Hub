@@ -34,4 +34,4 @@ def add_meat():
 
         return redirect(url_for('user_profile.profile', user_name=current_user.username))
     entries = scrape_live_swimrankings()
-    return render_template('user/meets/add_meets.html', entries=entries)
+    return render_template('user/meets/add_meets.html', entries=entries, user=current_user)
