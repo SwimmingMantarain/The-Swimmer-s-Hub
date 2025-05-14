@@ -14,12 +14,10 @@
 }
 
 .profile-container {
-    display: flex;
-    gap: 1.5rem;
-    justify-content: center;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    margin: 1rem auto;
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: masonry;
 }
 
 .profile-section {

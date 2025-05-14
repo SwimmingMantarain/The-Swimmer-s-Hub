@@ -78,3 +78,14 @@ def delete_meet():
     except Exception as e:
         db.session.rollback()
         return {"success": False, "message": f"An error occurred: {str(e)}"}, 500
+
+@db_api.route("/db/post/change_password", methods=["POST"])
+@login_required
+def change_password():
+    old = request.form.get('old_pswd')
+    new = request.form.get('new_pswd')
+    confirm = request.form.get('confirm_pswd')
+
+    print(old, new, confirm)
+
+    return {"success": True, "message": "beans"}, 200

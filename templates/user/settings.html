@@ -44,9 +44,18 @@
         <h1>Your Account</h1>
         <div class="option-list">
             <button type="button" id="delete_account">Delete Account</button>
+            <button type="button" id="change_password">Change Password</button>
         </div>
     </div>
 </fieldset>
+
+<div id="modal" class="modal">
+    <div class="modal-inner">
+        <span class="close" id="closeModalBtn">&times;</span>
+        <h2 class="modal-legend" id="modal-legend">Modal</h2>
+        <div id="modal-content"></div>
+    </div>
+</div>
 {% endblock %} {% block scripts %}
 <script src="{{ url_for('static', filename='js/settings.js') }}"></script>
 {% endblock %}
