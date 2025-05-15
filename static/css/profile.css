@@ -15,12 +15,15 @@
 
 .profile-container {
     display: grid;
-    gap: 16px;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: masonry;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .profile-section {
+    width: 100%;
     background-color: var(--medium-blue);
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
@@ -60,8 +63,7 @@ tr {
 }
 
 #meat-section {
-    max-width: 450px;
-    min-width: 300px;
+    width: 100%;
 }
 
 #meat-section .empty-state {
@@ -105,6 +107,7 @@ tr {
     justify-content: center;
     gap: 1.2rem;
     padding: 2rem;
+    width: 100%;
 }
 
 #pbs-section table {
@@ -149,8 +152,7 @@ tr {
 /* Mobile responsiveness */
 @media only screen and (max-width: 768px) {
     .profile-container {
-        flex-direction: column;
-        align-items: stretch;
+        grid-template-columns: 1fr;
         width: 100%;
         padding: 0 1rem;
         gap: 1.5rem;

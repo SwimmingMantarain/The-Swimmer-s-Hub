@@ -88,6 +88,16 @@ legend {
     transform: translateY(-2px);
 }
 
+/* Active navigation item */
+.nav-item a.active {
+    background-color: var(--light-blue);
+    border-bottom: 2px solid var(--accent-blue);
+}
+
+.nav-item a:active {
+    transform: scale(0.95);
+}
+
 /* Flash Messages */
 .flashes {
     list-style: none;
@@ -242,5 +252,187 @@ td {
 
     .nav-bar {
         flex-wrap: wrap;
+    }
+}
+
+/* Changelog Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.modal-inner {
+    background-color: var(--medium-blue);
+    border: 2px solid var(--accent-blue);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    width: 90%;
+    max-width: 800px;
+    max-height: 85vh;
+    position: relative;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    animation: modalFadeIn 0.3s ease-out;
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-legend {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--text);
+    border-bottom: 1px solid var(--accent-blue);
+    padding-bottom: 0.8rem;
+    width: 100%;
+}
+
+.changelog-content {
+    max-height: calc(85vh - 120px);
+    overflow-y: auto;
+    padding-right: 15px;
+    flex-grow: 1;
+}
+
+/* Markdown Changelog Styling */
+.changelog-content h1 {
+    font-size: 1.8rem;
+    margin: 0.5rem 0 1.5rem 0;
+    color: var(--text);
+}
+
+.changelog-content h2 {
+    font-size: 1.5rem;
+    margin: 1.5rem 0 0.8rem 0;
+    color: var(--accent-blue);
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--light-blue);
+}
+
+.changelog-content h3 {
+    font-size: 1.2rem;
+    margin: 1.2rem 0 0.5rem 0;
+    color: var(--accent-blue);
+}
+
+.changelog-content p {
+    font-size: 1rem;
+    color: var(--text);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.changelog-content a {
+    color: var(--accent-blue);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.changelog-content a:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+}
+
+.changelog-content ul, .changelog-content ol {
+    padding-left: 25px;
+    margin-bottom: 1.2rem;
+}
+
+.changelog-content li {
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.changelog-content code {
+    background-color: var(--deep-blue);
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 0.9rem;
+}
+
+.changelog-content pre {
+    background-color: var(--deep-blue);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    overflow-x: auto;
+    margin-bottom: 1.2rem;
+}
+
+.loading {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-secondary);
+}
+
+.error-message {
+    color: var(--error);
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid var(--error);
+    border-radius: var(--border-radius);
+    margin: 1rem 0;
+}
+
+.close, .close-changelog {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: var(--text-secondary);
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    z-index: 2;
+}
+
+.close:hover, .close-changelog:hover {
+    color: var(--error);
+}
+
+/* Responsive adjustments for changelog modal */
+@media only screen and (max-width: 768px) {
+    .modal-inner {
+        padding: 1.2rem;
+        width: 95%;
+    }
+    
+    .changelog-content {
+        padding-right: 5px;
+    }
+    
+    .modal-legend {
+        font-size: 1.3rem;
+    }
+    
+    .changelog-content h1 {
+        font-size: 1.5rem;
+    }
+    
+    .changelog-content h2 {
+        font-size: 1.3rem;
+    }
+    
+    .changelog-content h3 {
+        font-size: 1.1rem;
     }
 }

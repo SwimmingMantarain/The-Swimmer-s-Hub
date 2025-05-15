@@ -75,6 +75,9 @@
                     <a href="{{ url_for('auth.login') }}">Login</a>
                 </div>
                 {% endif %}
+                <div class="nav-item">
+                    <a href="#" id="changelog-btn">Changelog</a>
+                </div>
             </div>
             <div class="flash-container">
                 {% with messages = get_flashed_messages() %} {% if messages %}
@@ -90,7 +93,20 @@
         <div class="container">
             <main>{% block content %}{% endblock %}</main>
         </div>
+        <div id="changelog-modal" class="modal">
+            <div class="modal-inner">
+                <span class="close-changelog">&times;</span>
+                <h2 class="modal-legend">Aqua Metrics Changelog</h2>
+                <div class="changelog-content">
+                    <!-- Content will be loaded dynamically from CHANGELOG.md -->
+                    <div class="loading">Loading changelog...</div>
+                </div>
+            </div>
+        </div>
+        
         <script src="{{ url_for('static', filename='js/flash.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/changelog.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/markdown-renderer.js') }}"></script>
         {% block scripts %} {% endblock %}
     </body>
 </html>
