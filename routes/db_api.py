@@ -79,6 +79,8 @@ def delete_meet():
         db.session.rollback()
         return {"success": False, "message": f"An error occurred: {str(e)}"}, 500
 
+from werkzeug.security import generate_password_hash, check_password_hash
+
 @db_api.route("/db/post/change_password", methods=["POST"])
 @login_required
 def change_password():
@@ -86,6 +88,15 @@ def change_password():
     new = request.form.get('new_pswd')
     confirm = request.form.get('confirm_pswd')
 
-    print(old, new, confirm)
+    if current_user.check_password(old):
+        if check_password_hash(generate_password_hash(new), confirm):
+            current_user.set_password(new)
+            db.session.commit()
+
+        else:
+            return {"success": False, "message": "Passwords don't match"}, 400
+
+    else:
+        return {"success": False, "message": "Old password doesn't match"}, 300
 
     return {"success": True, "message": "beans"}, 200
