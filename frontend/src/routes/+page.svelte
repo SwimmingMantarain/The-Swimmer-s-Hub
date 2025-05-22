@@ -75,6 +75,9 @@
     .hero-content {
         z-index: 2;
         position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .logo-container {
@@ -110,6 +113,9 @@
         margin-bottom: 3rem;
         color: #94a3b8;
         max-width: 600px;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
         animation: fadeInUp 1s ease-out 0.6s both;
     }
 

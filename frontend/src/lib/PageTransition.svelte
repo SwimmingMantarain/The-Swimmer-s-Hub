@@ -51,22 +51,24 @@
         justify-content: center;
         opacity: 0;
         visibility: hidden;
-        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        transform: translateX(100%);
+        transition: none;
     }
 
     .transition-overlay.active {
         pointer-events: all;
         visibility: visible;
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .transition-overlay.active.out {
         opacity: 1;
-        animation: slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        transform: translateX(0);
     }
 
     .transition-overlay.active.in {
-        opacity: 1;
-        animation: slideOutLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        opacity: 0;
+        transform: translateX(-100%);
     }
 
     .transition-content {
@@ -74,7 +76,14 @@
         color: white;
         opacity: 0;
         transform: translateY(20px);
+    }
+
+    .transition-overlay.active .transition-content {
         animation: contentFadeIn 0.4s ease-out 0.2s both;
+    }
+
+    .transition-overlay.active.in .transition-content {
+        animation: contentFadeOut 0.3s ease-out both;
     }
 
     .swimmer-icon {
@@ -121,24 +130,6 @@
         animation-delay: 0.4s;
     }
 
-    @keyframes slideInRight {
-        0% {
-            transform: translateX(100%);
-        }
-        100% {
-            transform: translateX(0);
-        }
-    }
-
-    @keyframes slideOutLeft {
-        0% {
-            transform: translateX(0);
-        }
-        100% {
-            transform: translateX(-100%);
-        }
-    }
-
     @keyframes contentFadeIn {
         from {
             opacity: 0;
@@ -147,6 +138,17 @@
         to {
             opacity: 1;
             transform: translateY(0);
+        }
+    }
+
+    @keyframes contentFadeOut {
+        from {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        to {
+            opacity: 0;
+            transform: translateY(-20px);
         }
     }
 
