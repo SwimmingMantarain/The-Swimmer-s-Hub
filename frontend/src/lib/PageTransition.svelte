@@ -22,41 +22,23 @@
 <style>
     .transition-overlay {
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
+        top: 50%;
+        left: 50%;
+        width: 100vh;
         height: 100vh;
         background: #0a769d;
         pointer-events: none;
         z-index: 9999;
         border-radius: 50%;
-        transform: scale(0);
-        transform-origin: center;
+        transform: translate(-50%, -50%) scale(0);
         transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .transition-overlay.active.out {
-        transform: scale(3);
-        border-radius: 0%;
+        transform: translate(-50%, -50%) scale(2.5);
     }
 
     .transition-overlay.active.in {
-        transform: scale(3);
-        border-radius: 0%;
-    }
-
-    .transition-overlay.active.in {
-        animation: shrinkAndFade 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    }
-
-    @keyframes shrinkAndFade {
-        0% {
-            transform: scale(3);
-            border-radius: 0%;
-        }
-        100% {
-            transform: scale(0);
-            border-radius: 50%;
-        }
+        transform: translate(-50%, -50%) scale(0);
     }
 </style>

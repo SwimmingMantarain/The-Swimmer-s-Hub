@@ -12,7 +12,7 @@
 </script>
 
 <div class="home-container">
-    <div class="home-title">Welcome to Aqua Metrics</div>
+    <div class="home-title">Welcome to The Swimmer Hub</div>
     <div class="home-desc">
         Track your swimming progress, manage your upcoming meets, and view your
         personal bests.<br />
