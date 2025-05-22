@@ -9,7 +9,6 @@
         event.preventDefault();
         error = "";
 
-        // Adjust the API endpoint as needed for your Flask backend
         const response = await fetch("http://localhost:5000/login", {
             method: "POST",
             credentials: "include", // for cookies/session
@@ -20,7 +19,7 @@
         });
 
         if (response.ok) {
-            // Redirect to profile or home page after successful login
+            // Redirect to profile page after successful login
             goto("/profile");
         } else {
             const data = await response.json().catch(() => ({}));

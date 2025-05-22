@@ -1,6 +1,14 @@
+<!-- src/routes/+page.svelte -->
 <script>
-    // You can import SvelteKit's navigation if you want to use programmatic navigation
-    // import { goto } from '$app/navigation';
+    import { goto } from "$app/navigation";
+    import { startTransition } from "$lib/transition.js";
+
+    function handleLoginClick(event) {
+        event.preventDefault();
+        startTransition(() => {
+            goto("/login");
+        });
+    }
 </script>
 
 <div class="home-container">
@@ -13,7 +21,9 @@
         <br />
         Ready to dive in?
     </div>
-    <a class="login-link" href="/login">Register or Login ;)</a>
+    <a class="login-link" href="/login" on:click={handleLoginClick}
+        >Register or Login ;)</a
+    >
 </div>
 
 <style>
@@ -45,6 +55,7 @@
         text-decoration: none;
         font-weight: 600;
         transition: background 0.2s;
+        cursor: pointer;
     }
     .login-link:hover {
         background: #1298cb;
