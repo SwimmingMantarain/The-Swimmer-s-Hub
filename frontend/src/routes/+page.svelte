@@ -1,14 +1,14 @@
 <!-- src/routes/+page.svelte -->
 <script>
     import { goto } from "$app/navigation";
-    import { startTransition } from "$lib/transition.js";
+    import { fadeTransition } from "$lib/transition.js";
     import { onMount } from "svelte";
 
     let mounted = false;
 
     function handleLoginClick(event) {
         event.preventDefault();
-        startTransition(() => {
+        fadeTransition(() => {
             goto("/login");
         });
     }
@@ -20,9 +20,7 @@
 
 <div class="home-container" class:mounted>
     <div class="hero-content">
-        <div class="logo-container">
-            <div class="logo">🏊‍♂️</div>
-        </div>
+        <div class="logo">🏊‍♂️</div>
 
         <h1 class="home-title">
             Welcome to <span class="gradient-text">The Swimmer Hub</span>
@@ -38,18 +36,16 @@
         <div class="cta-section">
             <p class="ready-text">Ready to dive in?</p>
             <a class="login-button" href="/login" on:click={handleLoginClick}>
-                <span>Register or Login</span>
-                <div class="button-shine"></div>
+                Register or Login
             </a>
         </div>
     </div>
 
-    <div class="floating-elements">
-        <div class="float-element element-1">🏆</div>
-        <div class="float-element element-2">⏱️</div>
-        <div class="float-element element-3">📊</div>
-        <div class="float-element element-4">🥇</div>
-    </div>
+    <!-- Floating decorations -->
+    <div class="float-element element-1">🏆</div>
+    <div class="float-element element-2">⏱️</div>
+    <div class="float-element element-3">📊</div>
+    <div class="float-element element-4">🥇</div>
 </div>
 
 <style>
@@ -63,8 +59,8 @@
         padding: 2rem;
         position: relative;
         opacity: 0;
-        transform: translateY(30px);
-        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transform: translateY(20px);
+        transition: all 0.6s ease-out;
     }
 
     .home-container.mounted {
@@ -78,15 +74,13 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-    }
-
-    .logo-container {
-        margin-bottom: 2rem;
-        animation: floatLogo 3s ease-in-out infinite;
+        text-align: center;
     }
 
     .logo {
         font-size: 4rem;
+        margin-bottom: 2rem;
+        animation: float 3s ease-in-out infinite;
         filter: drop-shadow(0 4px 8px rgba(14, 165, 233, 0.3));
     }
 
@@ -95,7 +89,6 @@
         font-weight: 800;
         margin-bottom: 2rem;
         line-height: 1.2;
-        animation: fadeInUp 1s ease-out 0.3s both;
     }
 
     .gradient-text {
@@ -113,17 +106,13 @@
         margin-bottom: 3rem;
         color: #94a3b8;
         max-width: 600px;
-        text-align: center;
-        margin-left: auto;
-        margin-right: auto;
-        animation: fadeInUp 1s ease-out 0.6s both;
     }
 
     .cta-section {
-        animation: fadeInUp 1s ease-out 0.9s both;
-    }
-
-    .ready-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
         font-size: 1.1rem;
         color: #cbd5e1;
         margin-bottom: 1.5rem;
@@ -132,7 +121,6 @@
 
     .login-button {
         display: inline-block;
-        position: relative;
         background: linear-gradient(135deg, #0ea5e9, #3b82f6);
         color: white;
         padding: 1rem 2.5rem;
@@ -140,48 +128,13 @@
         font-size: 1.1rem;
         font-weight: 600;
         text-decoration: none;
-        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        box-shadow:
-            0 4px 15px rgba(14, 165, 233, 0.3),
-            0 0 0 1px rgba(255, 255, 255, 0.1);
-        overflow: hidden;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
     }
 
     .login-button:hover {
         transform: translateY(-2px);
-        box-shadow:
-            0 8px 25px rgba(14, 165, 233, 0.4),
-            0 0 0 1px rgba(255, 255, 255, 0.2);
-    }
-
-    .login-button:active {
-        transform: translateY(0);
-    }
-
-    .button-shine {
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-            90deg,
-            transparent,
-            rgba(255, 255, 255, 0.2),
-            transparent
-        );
-        transition: left 0.5s;
-    }
-
-    .login-button:hover .button-shine {
-        left: 100%;
-    }
-
-    .floating-elements {
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        z-index: 1;
+        box-shadow: 0 8px 25px rgba(14, 165, 233, 0.4);
     }
 
     .float-element {
@@ -189,6 +142,7 @@
         font-size: 2rem;
         opacity: 0.6;
         animation: float 6s ease-in-out infinite;
+        pointer-events: none;
     }
 
     .element-1 {
@@ -215,24 +169,13 @@
         animation-delay: 4.5s;
     }
 
-    @keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    @keyframes floatLogo {
+    @keyframes float {
         0%,
         100% {
             transform: translateY(0px);
         }
         50% {
-            transform: translateY(-10px);
+            transform: translateY(-20px);
         }
     }
 
@@ -243,26 +186,6 @@
         }
         50% {
             background-position: 100% 50%;
-        }
-    }
-
-    @keyframes float {
-        0%,
-        100% {
-            transform: translateY(0px) rotate(0deg);
-            opacity: 0.6;
-        }
-        25% {
-            transform: translateY(-20px) rotate(5deg);
-            opacity: 0.8;
-        }
-        50% {
-            transform: translateY(-10px) rotate(-3deg);
-            opacity: 0.4;
-        }
-        75% {
-            transform: translateY(-25px) rotate(2deg);
-            opacity: 0.7;
         }
     }
 
