@@ -1,14 +1,17 @@
 from flask import Flask
 from flask_login import LoginManager
 from flask_migrate import Migrate
+from flask_cors import CORS
 from models import db, User, UserMeet
 from werkzeug.security import generate_password_hash
 from routes import auth, user_profile, defaults, db_api, user_meets
 import config
-import os
 
 app = Flask(__name__)
 app.config.from_object(config.Config)
+
+# CORS
+CORS(app, origins=['https://localhost:5173'], supports_credentials=True)
 
 # Initialize SQLAlchemy
 db.init_app(app)
